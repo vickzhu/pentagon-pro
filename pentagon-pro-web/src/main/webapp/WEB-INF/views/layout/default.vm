@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+    	<title>支付平台</title>
+    	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<base href="$!hostTool.basePath"/>
+		    	<link rel="stylesheet" media="screen,projection" type="text/css" href="resources/css/reset.css" />
+    	<link rel="stylesheet" media="screen,projection" type="text/css" href="resources/css/main.css" />
+    	<link rel="stylesheet" media="screen,projection" type="text/css" href="resources/css/2col.css" title="2col" />
+    	<link rel="alternate stylesheet" media="screen,projection" type="text/css" href="resources/css/1col.css" title="1col" />
+    	<!--[if lte IE 6]><link rel="stylesheet" media="screen,projection" type="text/css" href="resources/css/main-ie6.css" /><![endif]-->
+    	<link rel="stylesheet" media="screen,projection" type="text/css" href="resources/css/style.css" />
+    	<link rel="stylesheet" media="screen,projection" type="text/css" href="resources/css/mystyle.css" />
+		<script type="text/javascript" src="resources/js/jquery.min.js"></script>
+    </head>
+    <body>
+    	<div id="main">
+    		#parse("control/header.vm")
+    		<hr class="noscreen" />
+    		<!-- /header -->
+    		<hr class="noscreen" />
+    		<!-- Columns -->
+    		<div id="cols" class="box">
+    			#parse("control/left.vm")
+    			<hr class="noscreen" />
+    			<!-- Content (Right Column) -->
+    			$screen_content
+    			<!-- /content -->
+    		</div>
+          <!-- /cols -->
+        </div>
+        #include("control/footer.vm")
+		<script type="text/javascript" src="resources/js/jquery.footer.js"></script>
+		<script type="text/javascript" src="resources/js/switcher.js"></script>
+		<script type="text/javascript" src="resources/js/toggle.js"></script>
+		<script type="text/javascript" src="resources/js/ui.core.js"></script>
+		<script type="text/javascript" src="resources/js/ui.tabs.js"></script>
+    </body>
+</html>

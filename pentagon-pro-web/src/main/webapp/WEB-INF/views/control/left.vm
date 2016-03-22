@@ -1,0 +1,25 @@
+<!-- Aside (Left Column) -->
+<div id="aside" class="box">
+  <div>
+    <!-- Logo (Max. width = 200px) -->
+    <p id="logo"><a href="homepage" title="回到首页"><img src="resources/image/logo.gif" alt="" /></a></p>
+  </div>
+  <!-- /padding -->
+  <ul class="box">
+	
+	#foreach($permissionGroup in $user_menus)
+		<li id="submenu-active" class="menuli menu_item">
+			<a href="javascript:void(0)">$!permissionGroup.groupName</a>
+            <ul>
+				#foreach($permission in $permissionGroup.opPermissionList)
+					<li><a href="$request.contextPath$!{permission.opResourceURI}">$!{permission.permissionName}</a></li>
+				#end
+            </ul>
+        </li>
+	#end
+	<li id="submenu-active" class="menuli">
+		<a href="changepwd">修改用户密码</a>
+    </li>
+  </ul>
+</div>
+<!-- /aside -->

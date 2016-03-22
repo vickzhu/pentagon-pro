@@ -1,0 +1,15 @@
+<!-- Tray -->
+  <div id="tray" class="box">
+    <p class="f-left box">
+      <!-- Switcher -->
+      <span class="f-left" id="switcher"> 
+		<a href="javascript:void(0);" rel="1col" class="styleswitch ico-col1" title="Display one column">
+			<img src="resources/image/switcher-1col.gif" alt="1 Column" />
+		</a> 
+		<a href="javascript:void(0)" rel="2col" class="styleswitch ico-col2" title="Display two columns">
+			<img src="resources/image/switcher-2col.gif" alt="" />
+		</a> 
+	  </span> 平台: <strong>Gandalf运营平台</strong> </p>
+    <p class="f-right">用户: <strong><a href="javascript:void(0)">$!{cookie.get('UK')}</a></strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong><a href="${request.contextPath}/logout" id="logout">退出</a></strong></p>
+  </div>
+  <!--  /tray -->

@@ -1,0 +1,55 @@
+<!-- 分页 -->
+  <link rel="stylesheet" media="screen,projection" type="text/css" href="resources/css/page/Blue.css" />
+  <div class="manu">
+	<input type="hidden" name="pageIndex" id="pageIndexInput" value="$!{pageInfo.pageIndex}"/>
+	<input type="hidden" id="pageSizeInput" value="$!{pageInfo.pageSize}"/>
+	<input type="hidden" id="totalPagesInput" value="$!{pageInfo.totalPages}"/>
+	共<font color='red'> $!{pageInfo.totalRecords}</font>条记录　每页显示
+    <label>
+        <select name="pageSize" id="pageSizeSelect" onchange="gotoPage(1)" style="color:red">
+          <option value="5" style="color:red">5</option>
+          <option value="10" style="color:red">10</option>
+          <option value="20" style="color:red">20</option>
+          <option value="50" style="color:red">50</option>
+          <option value="100" style="color:red">100</option>
+        </select>
+    </label>
+	条&nbsp;&nbsp;第<font color='red'>$!{pageInfo.pageIndex}</font>页 &nbsp;&nbsp;共<font color='red'>$!{pageInfo.totalPages}</font>页 &nbsp;&nbsp;<span id="firstPage">&#171; 首页</span>
+	#if(${pageInfo.pageIndex} > 1)
+    	<span onclick="javascript:gotoPage($math.sub($!{pageInfo.pageIndex}, 1))">&#171; 上一页</span>
+	#else
+    	<span class="disabled">&#171; 上一页</span>
+	#end
+	#if(${pageInfo.pageIndex} < $!{pageInfo.totalPages})
+    	<span onclick="javascript:gotoPage($math.add($!{pageInfo.pageIndex}, 1));">下一页  &#187;</span>
+	#else
+    	<span class="disabled">下一页  &#187;</span>
+	#end
+	<span id="lastPage">末页  &#187;</span>
+  </div>
+	<script type="text/javascript">
+		$(function() {
+			var pIndex = $("#pageIndexInput");
+			$("#pageSizeSelect").val($("#pageSizeInput").val());
+			if(pIndex.val() <= 1) {
+				$("#firstPage").addClass("disabled");
+			} else {
+				$("#firstPage").click(function() {
+					gotoPage(1);
+				});
+			}
+			if(pIndex.val() == $("#totalPagesInput").val()) {
+				$("#lastPage").addClass("disabled");
+			} else {
+				$("#lastPage").click(function() {
+					gotoPage($("#totalPagesInput").val());
+				});
+			}
+		});
+		
+		function gotoPage(index) {
+			$("#pageIndexInput").val(index);
+			$("div#content").find("form:first").submit();
+		}
+		
+    </script>

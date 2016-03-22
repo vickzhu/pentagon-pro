@@ -19,8 +19,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserExample> implemen
 
 	@Override
 	protected BaseMapper<User, UserExample> getMapper() {
-//		return userMapper;
-		return null;
+		return userMapper;
 	}
 	
 }

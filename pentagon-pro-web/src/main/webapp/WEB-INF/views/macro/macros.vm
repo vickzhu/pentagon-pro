@@ -1,0 +1,7 @@
+#macro(showEnable $enable)
+	#if($enable == 'Y')
+		<font color="green">启用</font>
+	#else
+		<font color="red">禁用</font>
+	#end
+#end

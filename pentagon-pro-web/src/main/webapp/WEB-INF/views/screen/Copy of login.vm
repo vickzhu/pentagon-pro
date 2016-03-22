@@ -1,0 +1,72 @@
+#set( $layout = "layout/null.vm" )
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml">
+<HEAD>
+	<base href="${hostTool.basePath}"/>
+	<META content="text/html; charset=utf-8" http-equiv="Content-Type">
+	<title>测试啦</title>
+</HEAD>
+<body>
+	#springUrl("/login")
+	${session.creationTime}
+    <div id="logo"></div>
+    <div id="in">
+    	<div id="left"></div>
+    	<div id="right">
+    		<form method="post" action="login" method="post">
+			$!{tokenTool.hiddenField}
+    		<ul>
+    		  <li>
+    			<span>用户名：</span> <input style="width: 190px" name="username" id="usernameInput"> 
+    		  </li>
+    		  <li>
+    			<span>密&nbsp;&nbsp;码：</span> <input style="width: 190px" type="password" name="password" id="passwordInput"> 
+    		  </li>
+    		  <li>
+    			<span>验证码：</span>
+				<input style="width: 95px" name="captcha" id="captchaInput"/>
+                <a href="javascript:;"><img src='${response.encodeURL("captcha/captcha.jpg")}' title="点击刷新" id="captchaA" style="vertical-align: middle;"/></a>
+    		  </li>
+    		  <li style="text-align:center">
+    			<input class="button" value="登录" type="submit" id="submitButton"> 
+    		  </li>
+    		  <li>
+				#if(${request.getParameter('error')} == 'account')
+					<font color="red">用户名或密码错误!</font><br/> 
+				#elseif(${request.getParameter('error')} == 'captcha')
+					<font color="red">验证码错误!</font> 
+				#end
+    		  </li>
+    		</ul>
+    		</form>
+    	</div>
+    </div>
+    <script type="text/javascript">
+		var captchaUrl = "#springUrl('captcha/captcha.jpg')";
+		var usernameInput = document.getElementById("usernameInput");
+		usernameInput.focus();
+		var captchaA = document.getElementById("captchaA");
+		captchaA.onclick = function() {
+			this.src = "captcha/new.jpg?"+Math.random();
+		}
+		var submitButton = document.getElementById("submitButton");
+		submitButton.onclick = function() {
+			if(usernameInput.value == "") {
+				alert("用户名不能为空!");
+				usernameInput.focus();
+				return false;
+			}
+			var passwordInput = document.getElementById("passwordInput");
+			if(passwordInput.value == "") {
+				alert("密码不能为空!");
+				return false;
+			}
+			var captchaInput = document.getElementById("captchaInput");
+			if(captchaInput.value == "") {
+				alert("验证码不能为空!");
+				return false;
+			}
+		}
+	</script>
+</body>
+</HTML>

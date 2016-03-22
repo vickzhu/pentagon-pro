@@ -14,11 +14,13 @@
 		<groupId>mysql</groupId>
 		<artifactId>mysql-connector-java</artifactId>
 		<version>5.1.9</version>
+		<scope>provided</scope>
 	</dependency>
   	<dependency>
         <groupId>com.alibaba</groupId>
         <artifactId>druid</artifactId>
         <version>${druid.version}</version>
+        <scope>provided</scope>
     </dependency>
   </dependencies>
   <build>
