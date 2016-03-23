@@ -5,5 +5,7 @@ import com.pentagon.system.dao.model.User;
 import com.pentagon.system.dao.model.UserExample;
 
 public interface UserService extends BaseService<User, UserExample> {
-
+	
+	public User selectByUsername(String username);
+	
 }

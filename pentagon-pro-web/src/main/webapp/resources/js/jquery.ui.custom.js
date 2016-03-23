@@ -1,4 +1,4 @@
-/*!
+/**
  * jQuery UI 1.8.21
  *
  * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
@@ -317,7 +317,7 @@ $.extend( $.ui, {
 });
 
 })( jQuery );
-/*!
+/**
  * jQuery UI Widget 1.8.21
  *
  * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
@@ -589,7 +589,7 @@ $.Widget.prototype = {
 };
 
 })( jQuery );
-/*!
+/**
  * jQuery UI Mouse 1.8.21
  *
  * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
@@ -754,7 +754,7 @@ $.widget("ui.mouse", {
 });
 
 })(jQuery);
-/*!
+/**
  * jQuery UI Position 1.8.21
  *
  * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
@@ -1057,7 +1057,7 @@ if ( !$.offset.setOffset ) {
 })();
 
 }( jQuery ));
-/*!
+/**
  * jQuery UI Draggable 1.8.21
  *
  * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
@@ -1890,7 +1890,7 @@ $.ui.plugin.add("draggable", "zIndex", {
 });
 
 })(jQuery);
-/*!
+/**
  * jQuery UI Droppable 1.8.21
  *
  * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
@@ -2186,7 +2186,7 @@ $.ui.ddmanager = {
 };
 
 })(jQuery);
-/*!
+/**
  * jQuery UI Resizable 1.8.21
  *
  * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
@@ -2993,7 +2993,7 @@ var isNumber = function(value) {
 };
 
 })(jQuery);
-/*!
+/**
  * jQuery UI Selectable 1.8.21
  *
  * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
@@ -3260,7 +3260,7 @@ $.extend($.ui.selectable, {
 });
 
 })(jQuery);
-/*!
+/**
  * jQuery UI Sortable 1.8.21
  *
  * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
@@ -4342,7 +4342,7 @@ $.extend($.ui.sortable, {
 });
 
 })(jQuery);
-/*!
+/**
  * jQuery UI Autocomplete 1.8.21
  *
  * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
@@ -4973,7 +4973,7 @@ $.widget("ui.menu", {
 });
 
 }(jQuery));
-/*!
+/**
  * jQuery UI Button 1.8.21
  *
  * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
@@ -5387,7 +5387,7 @@ $.widget( "ui.buttonset", {
 });
 
 }( jQuery ) );
-/*!
+/**
  * jQuery UI Slider 1.8.21
  *
  * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
@@ -6049,7 +6049,7 @@ $.extend( $.ui.slider, {
 });
 
 }(jQuery));
-/*!
+/**
  * jQuery UI Progressbar 1.8.21
  *
  * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)

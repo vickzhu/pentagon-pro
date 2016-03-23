@@ -1,3 +1,0 @@
-#set($layout = "layout/null.vm")
-hello ${session.getAttribute("username")}
-<a href="logout">退出</a>

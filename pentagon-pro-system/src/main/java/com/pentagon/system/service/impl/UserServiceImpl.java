@@ -1,7 +1,11 @@
 package com.pentagon.system.service.impl;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import com.gandalf.framework.mybatis.BaseMapper;
@@ -20,6 +24,18 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserExample> implemen
 	@Override
 	protected BaseMapper<User, UserExample> getMapper() {
 		return userMapper;
+	}
+
+	@Override
+	public User selectByUsername(String username) {
+		UserExample userExample = new UserExample();
+		UserExample.Criteria criteria = userExample.createCriteria();
+		criteria.andUsernameEqualTo(username);
+		List<User> userList = userMapper.selectByExample(userExample);
+		if(CollectionUtils.isEmpty(userList)){
+			return null;
+		}
+		return userList.get(0);
 	}
 	
 }

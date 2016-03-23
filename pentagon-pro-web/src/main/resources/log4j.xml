@@ -7,7 +7,7 @@
 		<param name="Target" value="System.out" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern"
-				value="[%d{yy-MM-dd HH:mm:ss}]  %p(pentagon) %C{1}#%M(L%L) : %m%n" />
+				value="[%d{yy.MM.dd HH:mm:ss}] %p(pentagon) %C{1}#%M(L%L): %m%n" />
 		</layout>
 	</appender>
 
@@ -16,7 +16,7 @@
 		<param name="DatePattern" value="'.'yyyy-MM-dd" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern"
-				value="[%d{yy-MM-dd HH:mm:ss}]  %p(%p(lottery)) %C{1}#%M(L%L) : %m%n" />
+				value="[%d{yy.MM.dd HH:mm:ss}] %p(%p(lottery)) %C{1}#%M(L%L): %m%n" />
 		</layout>
 	</appender>
 
