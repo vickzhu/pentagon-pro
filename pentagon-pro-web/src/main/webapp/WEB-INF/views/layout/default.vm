@@ -4,13 +4,13 @@
 <title>Matrix Admin</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="#springUrl('/resources/css/bootstrap.min.css')" />
-<link rel="stylesheet" href="#springUrl('/resources/css/bootstrap-responsive.min.css')" />
-<link rel="stylesheet" href="#springUrl('/resources/css/matrix-style.css')" />
-<link rel="stylesheet" href="#springUrl('/resources/css/matrix-media.css')" />
-<link rel="stylesheet" href="#springUrl('/resources/font-awesome/css/font-awesome.css')" />
+<link rel="stylesheet" href="#resources('css/bootstrap.min.css')" />
+<link rel="stylesheet" href="#resources('css/bootstrap-responsive.min.css')" />
+<link rel="stylesheet" href="#resources('css/matrix-style.css')" />
+<link rel="stylesheet" href="#resources('css/matrix-media.css')" />
+<link rel="stylesheet" href="#resources('font-awesome/css/font-awesome.css')" />
 <!--<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>-->
-<script src="#springUrl('/resources/js/jquery.min.js')"></script> 
+<script src="#resources('js/jquery.min.js')"></script> 
 </head>
 <body>
 #parse("control/header.vm")
@@ -18,8 +18,8 @@
 $screen_content
 #parse("control/footer.vm")
 <!--end-Footer-part-->
-<script src="#springUrl('/resources/js/jquery.ui.custom.min.js')"></script> 
-<script src="#springUrl('/resources/js/bootstrap.min.js')"></script> 
-<script src="#springUrl('/resources/js/matrix.js')"></script>
+<script src="#resources('js/jquery.ui.custom.min.js')"></script> 
+<script src="#resources('js/bootstrap.min.js')"></script> 
+<script src="#resources('js/matrix.js')"></script>
 </body>
 </html>

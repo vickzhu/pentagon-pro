@@ -22,12 +22,12 @@ public class PentagonExceptionHandler extends SimpleMappingExceptionResolver {
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request,
 			HttpServletResponse response, Object handler, Exception ex) {
-		logger.error("url:" + request.getRequestURI(), ex);
-		//ajax异常
-		if(RequestUtil.isAjaxRequest(request)){
-			
-		}
-		return null;
+//		logger.error("url:" + request.getRequestURI(), ex);
+//		//ajax异常
+//		if(RequestUtil.isAjaxRequest(request)){
+//			
+//		}
+		return super.resolveException(request, response, handler, ex);
 	}
 
 }

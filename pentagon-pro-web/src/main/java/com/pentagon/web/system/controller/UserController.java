@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gandalf.framework.util.StringUtil;
@@ -42,8 +43,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/add", method = RequestMethod.GET)
-	public ModelAndView add(){
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView add(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("system/userAdd");
 		return mav;
 	}
 	
@@ -51,4 +52,17 @@ public class UserController {
 	public ModelAndView doAdd(HttpServletRequest request, HttpServletResponse response){
 		return new ModelAndView();
 	}
+	
+	/**
+	 * 检查用户名是否存在
+	 * @param username
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/isExist", method = RequestMethod.GET)
+	public boolean isExist(String username){
+		User user = userService.selectByUsername(username);
+		return user == null ? Boolean.FALSE :Boolean.TRUE;
+	}
+	
 }

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gandalf.framework.encrypt.MD5Util;
@@ -28,6 +29,13 @@ public class SecurityController {
 	
 	private static final String ERROR_MSG = "errorMsg";
 	private static final String USERNAME = "username";
+	
+	@ResponseBody
+	@RequestMapping(value = "/test", method = RequestMethod.POST)
+	public String test(HttpServletRequest request, HttpServletResponse response){
+		System.out.println("进入......................................");
+		return "success";
+	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login(){

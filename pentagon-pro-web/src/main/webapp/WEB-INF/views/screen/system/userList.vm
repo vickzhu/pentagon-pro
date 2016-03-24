@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="#springUrl('/resources/css/uniform.css')" />
+<link rel="stylesheet" href="#resources('css/uniform.css')" />
 <div id="content">
   <div id="content-header">
     <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 首页</a> <a href="#">系统管理</a> <a href="#" class="current">用户管理</a> </div>
@@ -27,7 +27,7 @@
                       <option>Eighth option</option>
                     </select>
 					<button type="submit" class="btn btn-success">搜索</button>
-					<button type="submit" class="btn btn-primary">添加用户</button>
+					<button type="button" class="btn btn-primary" onclick="location.href='#springUrl("/system/user/add")'">添加用户</button>
                   </div>
                 </div>
 			</form>
@@ -99,4 +99,4 @@
     </div>
   </div>
 </div>
-<script src="#springUrl('/resources/js/jquery.uniform.js')"></script>  
+<script src="#resources('js/jquery.uniform.js')"></script>  

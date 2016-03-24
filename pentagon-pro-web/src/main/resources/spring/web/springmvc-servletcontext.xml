@@ -33,10 +33,7 @@
 			<beans:ref bean="csrfInterceptor"/>
 		</interceptor>
 		<interceptor>
-			<mapping path="/ucenter/**"/>
-			<mapping path="/borrow/**"/>
-			<mapping path="/bind-card/**"/>
-			<mapping path="/register/enterpirse/**"/>
+			<mapping path="/**"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 	</interceptors>
@@ -83,9 +80,7 @@
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="maxUploadSize" value="3145728"></beans:property>  
         <beans:property name="resolveLazily" value="true"></beans:property>
-	</beans:bean>
-	
-	<beans:bean id="exceptionHandler" class="com.pentagon.web.tool.PentagonExceptionHandler"/>  
+	</beans:bean>	  
 	
 	<beans:import resource="velocity-config.xml" />
 	

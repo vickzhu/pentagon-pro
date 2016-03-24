@@ -63,25 +63,24 @@
     	<servlet-name>appServlet</servlet-name>
     	<url-pattern>/</url-pattern>
   	</servlet-mapping>
-  	
   	<session-config>
     	<session-timeout>30</session-timeout>
   	</session-config>
   	<error-page>
-    	<error-code>404</error-code>
-    	<location>/resources/html/404.html</location>
+    	<error-code>403</error-code>
+    	<location>/resources/error403.html</location>
   	</error-page>
   	<error-page>
-    	<error-code>403</error-code>
-    	<location>/resources/html/403.html</location>
+    	<error-code>404</error-code>
+    	<location>/resources/error404.html</location>
   	</error-page>
   	<error-page>
     	<error-code>405</error-code>
-    	<location>/resources/html/405.html</location>
+    	<location>/resources/error405.html</location>
   	</error-page>
   	<error-page>
     	<error-code>500</error-code>
-    	<location>/resources/html/500.html</location>
+    	<location>/resources/error500.html</location>
   	</error-page>
   	<welcome-file-list>
     	<welcome-file>/login</welcome-file>
