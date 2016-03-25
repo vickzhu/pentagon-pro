@@ -24,7 +24,7 @@ public class UserController {
 	private UserService userService;
 	private static int pageSize = 10;
 	
-	@RequestMapping()
+	@RequestMapping
 	public ModelAndView index(HttpServletRequest request){
 		String pageStr = request.getParameter("page");
 		int page = 1;
@@ -50,6 +50,13 @@ public class UserController {
 	
 	@RequestMapping(value="/add", method = RequestMethod.POST)
 	public ModelAndView doAdd(HttpServletRequest request, HttpServletResponse response){
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		String cmfPwd = request.getParameter("cmfPwd");
+		String email = request.getParameter("email");
+		String phone = request.getParameter("phone");
+		String state = request.getParameter("");
+		User user = new User();
 		return new ModelAndView();
 	}
 	

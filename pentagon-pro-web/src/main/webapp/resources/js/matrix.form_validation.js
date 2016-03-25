@@ -3,8 +3,6 @@ $(document).ready(function(){
 	
 	$('input[type=checkbox],input[type=radio],input[type=file]').uniform();
 	
-	
-	
 	// Form Validation
     $("#basic_validate").validate({
 		rules:{
@@ -73,6 +71,12 @@ $(document).ready(function(){
 				minlength:6,
 				maxlength:20,
 				equalTo:"#pwd"
+			}
+		},
+		messages:{
+			pwd:{
+				required:"请输入密码",
+				minlength:"最小6位的长度"
 			}
 		},
 		errorClass: "help-inline",
