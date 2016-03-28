@@ -1,5 +1,6 @@
 package com.pentagon.web.system.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gandalf.framework.encrypt.MD5Util;
 import com.gandalf.framework.util.StringUtil;
 import com.pentagon.system.dao.model.User;
 import com.pentagon.system.dao.model.UserExample;
@@ -51,12 +53,32 @@ public class UserController {
 	@RequestMapping(value="/add", method = RequestMethod.POST)
 	public ModelAndView doAdd(HttpServletRequest request, HttpServletResponse response){
 		String username = request.getParameter("username");
+		if(StringUtil.isBlank(username)){
+			
+		}
 		String password = request.getParameter("password");
+		if(StringUtil.isBlank(password)){
+			
+		}
 		String cmfPwd = request.getParameter("cmfPwd");
+		if(password.equals(cmfPwd)){
+			
+		}
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
-		String state = request.getParameter("");
+		String enable = request.getParameter("enable");
+		if(StringUtil.isBlank(enable)){
+			
+		}
 		User user = new User();
+		user.setUsername(username);
+		user.setPassword(MD5Util.md5Hex(password));
+		user.setEmail(email);
+		user.setPhone(phone);
+		user.setEnable(Integer.valueOf(enable));
+		//user.setCreator(creator);
+		user.setGmtCreate(new Date());
+		userService.insert(user);
 		return new ModelAndView();
 	}
 	
@@ -66,10 +88,10 @@ public class UserController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/isExist", method = RequestMethod.GET)
-	public boolean isExist(String username){
+	@RequestMapping(value = "/isNotExist", method = RequestMethod.GET)
+	public boolean isNotExist(String username){
 		User user = userService.selectByUsername(username);
-		return user == null ? Boolean.FALSE :Boolean.TRUE;
+		return user == null ? Boolean.TRUE :Boolean.FALSE;
 	}
 	
 }

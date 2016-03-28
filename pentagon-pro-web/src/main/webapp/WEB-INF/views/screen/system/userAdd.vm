@@ -1,7 +1,7 @@
+<link rel="stylesheet" href="#resources('css/uniform.css')" />
 <div id="content">
     <div id="content-header">
       <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Common elements</a> </div>
-      <h1>Common Form Elements</h1>
     </div>
     <div class="container-fluid">
       <hr>
@@ -9,48 +9,54 @@
         <div class="span6">
           <div class="widget-box">
             <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-              <h5>Personal-info</h5>
+              <h5>用户信息</h5>
             </div>
             <div class="widget-content nopadding">
-              <form action="#" id="password_validate" method="get" class="form-horizontal" novalidate="novalidate">
+              <form action="#springUrl('/system/user/add')" id="user_form" method="post" class="form-horizontal" novalidate="novalidate">
                 <div class="control-group">
                   <label class="control-label">用户名 :</label>
                   <div class="controls">
-                    <input id="username" type="text" class="span5" placeholder="First name" />
+                    <input id="username" name="username" type="text" placeholder="First name" />
                   </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label">Password</label>
+                  <label class="control-label">密码</label>
                   <div class="controls">
-                    <input type="password" name="pwd" id="pwd" />
+                    <input type="password" name="password" id="password" />
                   </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label">Confirm password</label>
+                  <label class="control-label">确认密码</label>
                   <div class="controls">
-                    <input type="password" name="pwd2" id="pwd2" />
+                    <input type="password" name="cmfPwd" id="cmfPwd" />
                   </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label">Company info :</label>
+                  <label class="control-label">邮箱 :</label>
                   <div class="controls">
-                    <input type="text" class="span11" placeholder="Company name" />
+                    <input type="text" placeholder="Email" />
                   </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label">Description field:</label>
+                  <label class="control-label">电话:</label>
                   <div class="controls">
-                    <input type="text" class="span11" />
-                    <span class="help-block">Description field</span> </div>
+                    <input type="text" placeholder="Phone" />
+                    <span class="help-block">最好是手机号哦亲</span> 
+				  </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label">Message</label>
+                  <label class="control-label">是否可用</label>
                   <div class="controls">
-                    <textarea class="span11" ></textarea>
+                    <label>
+						<input type="radio" name="enable" value="1" checked />可用
+					</label>
+					<label>
+						<input type="radio" name="enable" value="0" />不可用
+					</label>
                   </div>
                 </div>
                 <div class="form-actions">
-                  <button type="submit" class="btn btn-success">Save</button>
+                  <button type="submit" class="btn btn-success">保存</button>
                 </div>
               </form>
             </div>
@@ -60,16 +66,57 @@
     </div>
 </div>
 <script src="#resources('js/jquery.uniform.js')"></script> 
-<script src="#resources('js/jquery.validate.js')"></script> 
-<script src="#resources('js/matrix.form_validation.js')"></script>
+<script src="#resources('js/jquery.validate.js')"></script>
 <script type="text/javascript">
 	$(function(){
-		$("#username").blur(function(){
-			jQuery.get("#springUrl('/system/user/isExist')?username="+$(this).val(),function(data){
-				if(data == true){
-					$("#username").select();
+		$("#user_form").validate({
+    		rules:{
+				username:{
+					required:true,
+					remote:{
+						type:"get",
+                    	url: "#springUrl('/system/user/isNotExist')",
+						data:{
+                            username:function() {
+                                return $("#username").val();
+                            }
+                        },
+						dataType: "json"
+					}					
+				},
+				password:{
+    				required: true,
+    				minlength:6,
+    				maxlength:20
+    			},
+    			cmfPwd:{
+    				required:true,
+    				minlength:6,
+    				maxlength:20,
+    				equalTo:"#password"
+    			},
+    			email:{
+    				required:true,
+    				email: true
+    			}
+    		},
+			messages:{
+				username:{
+					remote:"该用户已存在!"
+				},
+				password:{
+					minlength:"最小6位哦亲!"
 				}
-			});
-		});
+			},
+    		errorClass: "help-inline",
+    		errorElement: "span",
+    		highlight:function(element, errorClass, validClass) {
+    			$(element).parents('.control-group').addClass('error');
+    		},
+    		unhighlight: function(element, errorClass, validClass) {
+    			$(element).parents('.control-group').removeClass('error');
+    			$(element).parents('.control-group').addClass('success');
+    		}
+    	});
 	})
 </script>

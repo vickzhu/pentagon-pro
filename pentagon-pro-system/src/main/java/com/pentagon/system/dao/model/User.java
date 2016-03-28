@@ -23,6 +23,8 @@ public class User {
 
     private String lastLoginIp;
 
+    private Long creator;
+
     private Date gmtCreate;
 
     private Date gmtUpdate;
@@ -105,6 +107,14 @@ public class User {
 
     public void setLastLoginIp(String lastLoginIp) {
         this.lastLoginIp = lastLoginIp == null ? null : lastLoginIp.trim();
+    }
+
+    public Long getCreator() {
+        return creator;
+    }
+
+    public void setCreator(Long creator) {
+        this.creator = creator;
     }
 
     public Date getGmtCreate() {

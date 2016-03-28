@@ -27,9 +27,9 @@
     				<td><input type="text" size="40" name="email" class="input-text" /></td>
     			</tr>
 				<tr>
-    				<td>状态:</td>
+    				<td>是否可用:</td>
     				<td>
-                        <select name="userStatus" class="myselect" style="width:235px;">
+                        <select name="enable" class="myselect" style="width:235px;">
 							<option value="Y">启用</option>
 							<option value="N">禁用</option>
 						</select>
