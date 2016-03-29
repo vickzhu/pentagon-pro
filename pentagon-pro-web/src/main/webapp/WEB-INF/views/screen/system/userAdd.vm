@@ -13,39 +13,46 @@
             </div>
             <div class="widget-content nopadding">
               <form action="#springUrl('/system/user/add')" id="user_form" method="post" class="form-horizontal" novalidate="novalidate">
+				$!{tokenTool.hiddenField}
                 <div class="control-group">
-                  <label class="control-label">用户名 :</label>
+                  <label class="control-label">登录名:</label>
                   <div class="controls">
                     <input id="username" name="username" type="text" placeholder="First name" />
                   </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label">密码</label>
+                  <label class="control-label">密码:</label>
                   <div class="controls">
                     <input type="password" name="password" id="password" />
                   </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label">确认密码</label>
+                  <label class="control-label">确认密码:</label>
                   <div class="controls">
                     <input type="password" name="cmfPwd" id="cmfPwd" />
                   </div>
                 </div>
-                <div class="control-group">
-                  <label class="control-label">邮箱 :</label>
+				<div class="control-group">
+                  <label class="control-label">姓名:</label>
                   <div class="controls">
-                    <input type="text" placeholder="Email" />
+                    <input id="nickname" name="nickname" type="text" placeholder="Nickname" />
+					<span class="help-block">此处可做昵称或真实姓名</span>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">邮箱:</label>
+                  <div class="controls">
+                    <input type="text" placeholder="Email" id="email" name="email" />
                   </div>
                 </div>
                 <div class="control-group">
                   <label class="control-label">电话:</label>
                   <div class="controls">
-                    <input type="text" placeholder="Phone" />
-                    <span class="help-block">最好是手机号哦亲</span> 
+                    <input type="text" placeholder="Phone" id="phone" name="phone"/>
 				  </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label">是否可用</label>
+                  <label class="control-label">是否可用:</label>
                   <div class="controls">
                     <label>
 						<input type="radio" name="enable" value="1" checked />可用
@@ -54,6 +61,21 @@
 						<input type="radio" name="enable" value="0" />不可用
 					</label>
                   </div>
+                </div>
+				<div class="control-group">
+                  <label class="control-label">角色:</label>
+                  <div class="controls">
+                    <select >
+                      <option>First option</option>
+                      <option>Second option</option>
+                      <option>Third option</option>
+                      <option>Fourth option</option>
+                      <option>Fifth option</option>
+                      <option>Sixth option</option>
+                      <option>Seventh option</option>
+                      <option>Eighth option</option>
+                    </select>
+				  </div>
                 </div>
                 <div class="form-actions">
                   <button type="submit" class="btn btn-success">保存</button>
@@ -91,12 +113,9 @@
     			},
     			cmfPwd:{
     				required:true,
-    				minlength:6,
-    				maxlength:20,
     				equalTo:"#password"
     			},
     			email:{
-    				required:true,
     				email: true
     			}
     		},
@@ -105,12 +124,22 @@
 					remote:"该用户已存在!"
 				},
 				password:{
-					minlength:"最小6位哦亲!"
+					required:"请输入密码！",
+					minlength:"最小6位!",
+    				maxlength:"最大20位!"
+				},
+				cmfPwd:{
+					required:"请输入确认密码！",
+					equalTo:"两次输入密码不一致！"
+				},
+				email:{
+					email:"邮箱格式不正确！"
 				}
 			},
     		errorClass: "help-inline",
     		errorElement: "span",
     		highlight:function(element, errorClass, validClass) {
+				$(element).parents('.control-group').removeClass('success');
     			$(element).parents('.control-group').addClass('error');
     		},
     		unhighlight: function(element, errorClass, validClass) {

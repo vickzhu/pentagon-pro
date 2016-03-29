@@ -48,10 +48,10 @@
                 <tr class="odd gradeX">
                   <td>$!{user.userId}</td>
                   <td>$!{user.username}</td>
-                  <td>Win 95+</td>
-                  <td class="center"> 4</td>
+                  <td>$!{user.email}</td>
+                  <td class="center">$!{user.phone}</td>
                   <td class="center">
-					<a href="">编辑</a>
+					<a href="#springUrl('/system/user/edit')?userId=${user.userId}">编辑</a>
 				  </td>
                 </tr>
 				#end
@@ -74,4 +74,4 @@
     </div>
   </div>
 </div>
-<script src="#resources('js/jquery.uniform.js')"></script>  
+<script src="#resources('js/jquery.uniform.js')"></script>

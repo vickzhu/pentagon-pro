@@ -1,5 +1,6 @@
 package com.pentagon.web.system.controller;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import com.pentagon.system.service.UserService;
 @Controller
 @RequestMapping("/system/user")
 public class UserController {
+	
 	@Resource
 	private UserService userService;
 	private static int pageSize = 10;
@@ -37,6 +39,7 @@ public class UserController {
 		UserExample example = new UserExample();
 		example.setOffset((page-1)*pageSize);
 		example.setRows(pageSize);
+		example.setOrderByClause("gmt_create desc");
 		UserExample.Criteria criteria = example.createCriteria();
 		criteria.andUsernameNotEqualTo("admin");
 		List<User> userList = userService.selectByExample(example);
@@ -46,6 +49,7 @@ public class UserController {
 	
 	@RequestMapping(value="/add", method = RequestMethod.GET)
 	public ModelAndView add(HttpServletRequest request){
+		
 		ModelAndView mav = new ModelAndView("system/userAdd");
 		return mav;
 	}
@@ -79,7 +83,39 @@ public class UserController {
 		//user.setCreator(creator);
 		user.setGmtCreate(new Date());
 		userService.insert(user);
-		return new ModelAndView();
+		return new ModelAndView("redirect:system/userList");
+	}
+	
+	@RequestMapping(value="/edit", method = RequestMethod.GET)
+	public ModelAndView edit(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		String userId = request.getParameter("userId");
+		if(StringUtil.isBlank(userId)){
+			response.sendError(403);
+			return null;
+		}
+		User user = userService.selectByPrimaryKey(Long.valueOf(userId));
+		ModelAndView mav = new ModelAndView("system/userEdit");
+		mav.addObject("user", user);
+		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/edit", method = RequestMethod.POST)
+	public ModelAndView doEdit(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		String userIdStr = request.getParameter("userId");
+		if(StringUtil.isBlank(userIdStr)){
+			response.sendError(403);
+			return null;
+		}
+		User user = userService.selectByPrimaryKey(Long.valueOf(userIdStr));
+		String email = request.getParameter("email");
+		String phone = request.getParameter("phone");
+		String enable = request.getParameter("enable");
+		user.setPhone(phone);		
+		user.setEmail(email);
+		user.setEnable(Integer.valueOf(enable));
+		userService.updateByPrimaryKey(user);
+		return null;
 	}
 	
 	/**

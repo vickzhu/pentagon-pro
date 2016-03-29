@@ -11,6 +11,8 @@ public class User {
 
     private String nickname;
 
+    private Long roleId;
+
     private String email;
 
     private String phone;
@@ -59,6 +61,14 @@ public class User {
 
     public void setNickname(String nickname) {
         this.nickname = nickname == null ? null : nickname.trim();
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 
     public String getEmail() {

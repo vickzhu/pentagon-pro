@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	$('input[type=checkbox],input[type=radio],input[type=file]').uniform();
+	
 	$.ajaxSetup({
 		complete:function(xhr, ts){
 			var status = xhr.status;

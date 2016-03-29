@@ -249,17 +249,19 @@ CREATE TABLE `user` (
   `username` varchar(20) NOT NULL,
   `password` varchar(32) NOT NULL,
   `nickname` varchar(50) DEFAULT NULL,
+  `role_id` bigint(20) DEFAULT NULL COMMENT '角色',
   `email` varchar(50) DEFAULT NULL,
   `phone` varchar(15) DEFAULT NULL,
   `dept_id` bigint(20) DEFAULT NULL,
   `enable` int(11) NOT NULL,
   `last_login_time` datetime DEFAULT NULL,
   `last_login_ip` varchar(50) DEFAULT NULL,
+  `creator` bigint(20) DEFAULT NULL COMMENT '创建人',
   `gmt_create` datetime NOT NULL,
   `gmt_update` datetime DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -268,7 +270,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin','lajdflajdlsfjalskjfla','管理员','admin@admin.com','18688888888',NULL,1,NULL,NULL,'2016-03-21 18:20:30',NULL);
+INSERT INTO `user` VALUES (1,'admin','96e79218965eb72c92a549dd5a330112','管理员',NULL,'admin@admin.com','18688888888',NULL,1,'2016-03-23 13:30:37','0:0:0:0:0:0:0:1',NULL,'2016-03-21 18:20:30',NULL),(2,'test','96e79218965eb72c92a549dd5a330112',NULL,NULL,'test@z1i.com','',NULL,1,NULL,NULL,NULL,'2016-03-29 15:57:54',NULL),(3,'zhu','96e79218965eb72c92a549dd5a330112',NULL,NULL,'','',NULL,1,NULL,NULL,NULL,'2016-03-29 18:36:04',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -281,4 +283,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-22 18:26:11
+-- Dump completed on 2016-03-29 18:47:09
