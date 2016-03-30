@@ -101,11 +101,11 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(value="/edit", method = RequestMethod.POST)
-	public ModelAndView doEdit(HttpServletRequest request, HttpServletResponse response) throws IOException{
+	public boolean doEdit(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		String userIdStr = request.getParameter("userId");
 		if(StringUtil.isBlank(userIdStr)){
 			response.sendError(403);
-			return null;
+			return Boolean.FALSE;
 		}
 		User user = userService.selectByPrimaryKey(Long.valueOf(userIdStr));
 		String email = request.getParameter("email");
@@ -114,8 +114,8 @@ public class UserController {
 		user.setPhone(phone);		
 		user.setEmail(email);
 		user.setEnable(Integer.valueOf(enable));
-		userService.updateByPrimaryKey(user);
-		return null;
+		int count = userService.updateByPrimaryKey(user);
+		return count > 0;
 	}
 	
 	/**

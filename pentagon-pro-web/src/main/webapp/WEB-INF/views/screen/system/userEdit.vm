@@ -57,6 +57,7 @@
 </div>
 <script src="#resources('js/jquery.uniform.js')"></script> 
 <script src="#resources('js/jquery.validate.js')"></script>
+<script src="#resources('layer/layer.js')"></script>
 <script type="text/javascript">
 	$(function(){
 		$("#user_form").validate({
@@ -82,7 +83,15 @@
     		},
 			submitHandler:function(form){
 				jQuery.post("#springUrl('/system/user/edit')",$(form).serialize(),function(data){
-					
+					var msg = data==true?"更新成功！":"更新失败！";
+					var icon = data==true?6:5
+					layer.alert(msg, {
+                      skin: 'layui-layer-molv',
+					  icon: icon,
+					  closeBtn: 0
+                    }, function(){
+						window.location.reload();
+                    });
 				});
 			}
     	});
