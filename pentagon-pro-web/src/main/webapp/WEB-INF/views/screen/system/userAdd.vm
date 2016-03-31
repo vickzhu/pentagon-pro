@@ -6,6 +6,12 @@
     <div class="container-fluid">
       <hr>
       <div class="row-fluid">
+		#if($roleList.size() == 0)			
+		<div class="alert alert-error alert-block"> <a class="close" data-dismiss="alert" href="#">×</a>
+          <h4 class="alert-heading">错误!</h4>
+			新增用户需要角色信息，请您先新增角色! <a href="#springUrl('/system/role/add')">-->马上新增角色</a>
+		</div>
+		#end
         <div class="span6">
           <div class="widget-box">
             <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
@@ -15,19 +21,19 @@
               <form action="#springUrl('/system/user/add')" id="user_form" method="post" class="form-horizontal" novalidate="novalidate">
 				$!{tokenTool.hiddenField}
                 <div class="control-group">
-                  <label class="control-label">登录名:</label>
+                  <label class="control-label"><span class="star">*</span>登录名:</label>
                   <div class="controls">
-                    <input id="username" name="username" type="text" placeholder="First name" />
+                    <input id="username" name="username" type="text" placeholder="Username" />
                   </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label">密码:</label>
+                  <label class="control-label"><span class="star">*</span>密码:</label>
                   <div class="controls">
                     <input type="password" name="password" id="password" />
                   </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label">确认密码:</label>
+                  <label class="control-label"><span class="star">*</span>确认密码:</label>
                   <div class="controls">
                     <input type="password" name="cmfPwd" id="cmfPwd" />
                   </div>
@@ -40,7 +46,7 @@
                   </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label">邮箱:</label>
+                  <label class="control-label"><span class="star">*</span>邮箱:</label>
                   <div class="controls">
                     <input type="text" placeholder="Email" id="email" name="email" />
                   </div>
@@ -63,17 +69,13 @@
                   </div>
                 </div>
 				<div class="control-group">
-                  <label class="control-label">角色:</label>
+                  <label class="control-label"><span class="star">*</span>角色:</label>
                   <div class="controls">
-                    <select >
-                      <option>First option</option>
-                      <option>Second option</option>
-                      <option>Third option</option>
-                      <option>Fourth option</option>
-                      <option>Fifth option</option>
-                      <option>Sixth option</option>
-                      <option>Seventh option</option>
-                      <option>Eighth option</option>
+                    <select id="role" name="role">
+						<option value="">请选择</option>
+						#foreach($role in $roleList)
+						<option value="$!{role.roleId}">$!{role.roleName}</option>
+						#end
                     </select>
 				  </div>
                 </div>
@@ -116,11 +118,16 @@
     				equalTo:"#password"
     			},
     			email:{
+					required:true,
     				email: true
-    			}
+    			},
+				role:{
+					required:true
+				}
     		},
 			messages:{
 				username:{
+					required:"请输入用户名",
 					remote:"该用户已存在!"
 				},
 				password:{
@@ -133,7 +140,11 @@
 					equalTo:"两次输入密码不一致！"
 				},
 				email:{
+					required:"请输入邮箱！",
 					email:"邮箱格式不正确！"
+				},
+				role:{
+					required:"请选择角色！"
 				}
 			},
     		errorClass: "help-inline",

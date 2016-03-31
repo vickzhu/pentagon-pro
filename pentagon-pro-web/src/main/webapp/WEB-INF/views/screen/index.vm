@@ -39,6 +39,7 @@
                 <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
                   <p><a href="#">This is a much longer one that will go on for a few lines.Itaffle to pad out the comment.</a> </p>
                 </div>
+			  </li>  
               <li>
                 <button class="btn btn-warning btn-mini">View All</button>
               </li>

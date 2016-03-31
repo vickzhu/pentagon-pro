@@ -1136,6 +1136,10 @@ form {
 	padding-top: 15px;
 	width: 180px;
 }
+.form-horizontal .control-label .star{
+	padding: 5px;
+	color: red;
+}
 .form-horizontal .controls {
 	margin-left: 200px;
 	padding: 10px 0;

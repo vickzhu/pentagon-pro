@@ -1,6 +1,7 @@
 package com.pentagon.web.system.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -59,11 +60,14 @@ public class RoleController {
 	public ModelAndView doAdd(HttpServletRequest request, HttpServletResponse response){
 		String roleName = request.getParameter("roleName");
 		String roleDesc = request.getParameter("roleDesc");
+		String enable = request.getParameter("enable");
 		Role role = new Role();
 		role.setRoleName(roleName);
 		role.setRoleDesc(roleDesc);
+		role.setEnable(Integer.valueOf(enable));
+		role.setGmtCreate(new Date());
 		roleService.insert(role);
-		return new ModelAndView("redirect:system/roleList");
+		return new ModelAndView("redirect:/system/role");
 	}
 	
 	@RequestMapping(value="/edit", method = RequestMethod.GET)
@@ -92,6 +96,7 @@ public class RoleController {
 		String roleDesc = request.getParameter("roleDesc");
 		role.setRoleName(roleName);
 		role.setRoleDesc(roleDesc);
+		role.setGmtUpdate(new Date());
 		roleService.updateByPrimaryKey(role);
 		return null;
 	}

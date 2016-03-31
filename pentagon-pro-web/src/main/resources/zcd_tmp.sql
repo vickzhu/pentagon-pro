@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `department`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `department` (
-  `dept_id` bigint(20) NOT NULL,
+  `dept_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `dept_name` varchar(50) DEFAULT NULL,
   `parent_id` bigint(20) DEFAULT NULL,
   `enable` int(11) DEFAULT NULL,
@@ -50,7 +50,7 @@ DROP TABLE IF EXISTS `menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `menu` (
-  `menu_id` bigint(20) NOT NULL,
+  `menu_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `menu_name` varchar(50) NOT NULL,
   `uri` varchar(100) DEFAULT NULL,
   `parent_id` bigint(20) DEFAULT NULL,
@@ -75,7 +75,7 @@ DROP TABLE IF EXISTS `permission`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `permission` (
-  `permission_id` bigint(20) NOT NULL,
+  `permission_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `type` int(11) NOT NULL,
   PRIMARY KEY (`permission_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -98,7 +98,7 @@ DROP TABLE IF EXISTS `permission_menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `permission_menu` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `permission_id` bigint(20) NOT NULL,
   `menu_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
@@ -122,7 +122,7 @@ DROP TABLE IF EXISTS `permission_resource`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `permission_resource` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `permission_id` bigint(20) NOT NULL,
   `resource_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
@@ -146,7 +146,7 @@ DROP TABLE IF EXISTS `permission_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `permission_role` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `permission_id` bigint(20) NOT NULL,
   `role_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
@@ -170,7 +170,7 @@ DROP TABLE IF EXISTS `resource`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `resource` (
-  `resource_id` bigint(20) NOT NULL,
+  `resource_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `resource_name` varchar(20) NOT NULL,
   `resource_group_id` bigint(20) NOT NULL,
   `uri` varchar(100) NOT NULL,
@@ -195,7 +195,7 @@ DROP TABLE IF EXISTS `resource_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `resource_group` (
-  `group_id` bigint(20) NOT NULL,
+  `group_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `group_name` varchar(50) NOT NULL,
   PRIMARY KEY (`group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -218,14 +218,14 @@ DROP TABLE IF EXISTS `role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `role` (
-  `role_id` bigint(20) NOT NULL,
+  `role_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `role_name` varchar(20) NOT NULL,
   `role_desc` varchar(100) DEFAULT NULL,
   `enable` int(11) NOT NULL COMMENT '角色',
   `gmt_create` datetime NOT NULL,
   `gmt_update` datetime DEFAULT NULL,
   PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -234,6 +234,7 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
+INSERT INTO `role` VALUES (5,'总裁','就是公司的老板啦',1,'2016-03-31 16:34:48',NULL),(6,'副总裁','',1,'2016-03-31 16:56:22',NULL);
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,7 +271,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin','96e79218965eb72c92a549dd5a330112','管理员',NULL,'admin@admin.com','18688888888',NULL,1,'2016-03-23 13:30:37','0:0:0:0:0:0:0:1',NULL,'2016-03-21 18:20:30',NULL),(2,'test','96e79218965eb72c92a549dd5a330112',NULL,NULL,'test@z1i.com','',NULL,1,NULL,NULL,NULL,'2016-03-29 15:57:54',NULL),(3,'zhu','96e79218965eb72c92a549dd5a330112',NULL,NULL,'','',NULL,1,NULL,NULL,NULL,'2016-03-29 18:36:04',NULL);
+INSERT INTO `user` VALUES (1,'admin','96e79218965eb72c92a549dd5a330112','管理员',NULL,'admin@admin.com','18688888888',NULL,1,'2016-03-23 13:30:37','0:0:0:0:0:0:0:1',NULL,'2016-03-21 18:20:30',NULL),(2,'test','96e79218965eb72c92a549dd5a330112',NULL,NULL,'test@z1i.com','',NULL,1,NULL,NULL,NULL,'2016-03-29 15:57:54',NULL),(3,'zhu','96e79218965eb72c92a549dd5a330112',NULL,NULL,'z@h.u','',NULL,1,NULL,NULL,NULL,'2016-03-29 18:36:04',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -283,4 +284,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-29 18:47:09
+-- Dump completed on 2016-03-31 18:34:53

@@ -16,8 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gandalf.framework.encrypt.MD5Util;
 import com.gandalf.framework.util.StringUtil;
+import com.pentagon.system.dao.model.Role;
 import com.pentagon.system.dao.model.User;
 import com.pentagon.system.dao.model.UserExample;
+import com.pentagon.system.service.RoleService;
 import com.pentagon.system.service.UserService;
 
 @Controller
@@ -26,6 +28,9 @@ public class UserController {
 	
 	@Resource
 	private UserService userService;
+	@Resource
+	private RoleService roleService;
+	
 	private static int pageSize = 10;
 	
 	@RequestMapping
@@ -49,8 +54,9 @@ public class UserController {
 	
 	@RequestMapping(value="/add", method = RequestMethod.GET)
 	public ModelAndView add(HttpServletRequest request){
-		
+		List<Role> roleList = roleService.selectByExample(null);		
 		ModelAndView mav = new ModelAndView("system/userAdd");
+		mav.addObject("roleList", roleList);
 		return mav;
 	}
 	
@@ -83,7 +89,7 @@ public class UserController {
 		//user.setCreator(creator);
 		user.setGmtCreate(new Date());
 		userService.insert(user);
-		return new ModelAndView("redirect:system/userList");
+		return new ModelAndView("redirect:/system/user");
 	}
 	
 	@RequestMapping(value="/edit", method = RequestMethod.GET)
@@ -114,6 +120,7 @@ public class UserController {
 		user.setPhone(phone);		
 		user.setEmail(email);
 		user.setEnable(Integer.valueOf(enable));
+		user.setGmtUpdate(new Date());
 		int count = userService.updateByPrimaryKey(user);
 		return count > 0;
 	}
