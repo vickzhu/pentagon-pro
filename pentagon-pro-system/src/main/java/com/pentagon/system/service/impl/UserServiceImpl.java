@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.gandalf.framework.mybatis.BaseMapper;
 import com.gandalf.framework.mybatis.BaseServiceImpl;
+import com.gandalf.framework.web.tool.Page;
 import com.pentagon.system.dao.mapper.UserMapper;
 import com.pentagon.system.dao.model.User;
 import com.pentagon.system.dao.model.UserExample;
@@ -35,6 +36,16 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserExample> implemen
 			return null;
 		}
 		return userList.get(0);
+	}
+
+	@Override
+	public void selectByPagination(UserExample example, Page<User> page) {
+		example.setOffset(page.getOffset());
+		example.setRows(page.getPageSize());
+		int totalCounts = userMapper.countByExample(example);
+		page.setTotalCounts(totalCounts);
+		List<User> userList = userMapper.selectByExample(example);
+		page.setRecords(userList);		
 	}
 	
 }

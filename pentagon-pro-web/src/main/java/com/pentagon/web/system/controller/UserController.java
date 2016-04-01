@@ -2,7 +2,9 @@ package com.pentagon.web.system.controller;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gandalf.framework.encrypt.MD5Util;
 import com.gandalf.framework.util.StringUtil;
+import com.gandalf.framework.web.tool.Page;
 import com.pentagon.system.dao.model.Role;
 import com.pentagon.system.dao.model.User;
 import com.pentagon.system.dao.model.UserExample;
@@ -35,20 +38,33 @@ public class UserController {
 	
 	@RequestMapping
 	public ModelAndView index(HttpServletRequest request){
-		String pageStr = request.getParameter("page");
-		int page = 1;
+		String pageStr = request.getParameter("curPage");
+		int curPage = 1;
 		if(StringUtil.isNotBlank(pageStr)){
-			page = Integer.valueOf(pageStr);
+			curPage = Integer.valueOf(pageStr);
+		}
+		String roleStr = request.getParameter("role");
+		List<Role> roleList = roleService.selectByExample(null);
+		Map<Long, String> roleMap  = new HashMap<Long, String>();
+		for (Role role : roleList) {
+			roleMap.put(role.getRoleId(), role.getRoleName());
 		}
 		ModelAndView mav = new ModelAndView("system/userList");
+		Page<User> page = new Page<User>(curPage, 5);
 		UserExample example = new UserExample();
-		example.setOffset((page-1)*pageSize);
+		example.setOffset(page.getOffset());
 		example.setRows(pageSize);
 		example.setOrderByClause("gmt_create desc");
 		UserExample.Criteria criteria = example.createCriteria();
 		criteria.andUsernameNotEqualTo("admin");
-		List<User> userList = userService.selectByExample(example);
-		mav.addObject("userList", userList);
+		if(StringUtil.isNotBlank(roleStr)){
+			criteria.andRoleIdEqualTo(Long.valueOf(roleStr));
+		}
+		userService.selectByPagination(example, page);
+		mav.addObject("page", page);
+		mav.addObject("curPage", pageStr);
+		mav.addObject("role", roleStr);
+		mav.addObject("roleMap", roleMap);
 		return mav;
 	}
 	
@@ -76,6 +92,10 @@ public class UserController {
 		}
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
+		String roleStr = request.getParameter("roleId");
+		if(StringUtil.isBlank(roleStr)){
+			
+		}
 		String enable = request.getParameter("enable");
 		if(StringUtil.isBlank(enable)){
 			
@@ -85,6 +105,7 @@ public class UserController {
 		user.setPassword(MD5Util.md5Hex(password));
 		user.setEmail(email);
 		user.setPhone(phone);
+		user.setRoleId(Long.valueOf(roleStr));
 		user.setEnable(Integer.valueOf(enable));
 		//user.setCreator(creator);
 		user.setGmtCreate(new Date());
