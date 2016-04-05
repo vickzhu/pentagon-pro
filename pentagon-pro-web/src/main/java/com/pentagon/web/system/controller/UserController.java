@@ -10,6 +10,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,12 +31,14 @@ import com.pentagon.system.service.UserService;
 @RequestMapping("/system/user")
 public class UserController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	
 	@Resource
 	private UserService userService;
 	@Resource
 	private RoleService roleService;
 	
-	private static int pageSize = 10;
+	private static int pageSize = 15;
 	
 	@RequestMapping
 	public ModelAndView index(HttpServletRequest request){
@@ -43,6 +47,7 @@ public class UserController {
 		if(StringUtil.isNotBlank(pageStr)){
 			curPage = Integer.valueOf(pageStr);
 		}
+		String username = request.getParameter("username");
 		String roleStr = request.getParameter("role");
 		List<Role> roleList = roleService.selectByExample(null);
 		Map<Long, String> roleMap  = new HashMap<Long, String>();
@@ -50,13 +55,16 @@ public class UserController {
 			roleMap.put(role.getRoleId(), role.getRoleName());
 		}
 		ModelAndView mav = new ModelAndView("system/userList");
-		Page<User> page = new Page<User>(curPage, 5);
+		Page<User> page = new Page<User>(curPage, pageSize);
 		UserExample example = new UserExample();
 		example.setOffset(page.getOffset());
 		example.setRows(pageSize);
 		example.setOrderByClause("gmt_create desc");
 		UserExample.Criteria criteria = example.createCriteria();
 		criteria.andUsernameNotEqualTo("admin");
+		if(StringUtil.isNotBlank(username)){
+			criteria.andUsernameEqualTo(username);
+		}
 		if(StringUtil.isNotBlank(roleStr)){
 			criteria.andRoleIdEqualTo(Long.valueOf(roleStr));
 		}
@@ -64,6 +72,7 @@ public class UserController {
 		mav.addObject("page", page);
 		mav.addObject("curPage", pageStr);
 		mav.addObject("role", roleStr);
+		mav.addObject("username", username);
 		mav.addObject("roleMap", roleMap);
 		return mav;
 	}
@@ -117,6 +126,7 @@ public class UserController {
 	public ModelAndView edit(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		String userId = request.getParameter("userId");
 		if(StringUtil.isBlank(userId)){
+			logger.error("User Id is required!!!");
 			response.sendError(403);
 			return null;
 		}

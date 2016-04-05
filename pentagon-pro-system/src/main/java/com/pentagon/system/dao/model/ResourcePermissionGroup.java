@@ -1,6 +1,6 @@
 package com.pentagon.system.dao.model;
 
-public class ResourceGroup {
+public class ResourcePermissionGroup {
     private Long groupId;
 
     private String groupName;

@@ -43,13 +43,13 @@ LOCK TABLES `department` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `menu`
+-- Table structure for table `menu_permission`
 --
 
-DROP TABLE IF EXISTS `menu`;
+DROP TABLE IF EXISTS `menu_permission`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `menu` (
+CREATE TABLE `menu_permission` (
   `menu_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `menu_name` varchar(50) NOT NULL,
   `uri` varchar(100) DEFAULT NULL,
@@ -59,155 +59,62 @@ CREATE TABLE `menu` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `menu`
+-- Dumping data for table `menu_permission`
 --
 
-LOCK TABLES `menu` WRITE;
-/*!40000 ALTER TABLE `menu` DISABLE KEYS */;
-/*!40000 ALTER TABLE `menu` ENABLE KEYS */;
+LOCK TABLES `menu_permission` WRITE;
+/*!40000 ALTER TABLE `menu_permission` DISABLE KEYS */;
+/*!40000 ALTER TABLE `menu_permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `permission`
+-- Table structure for table `resource_permission`
 --
 
-DROP TABLE IF EXISTS `permission`;
+DROP TABLE IF EXISTS `resource_permission`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `permission` (
-  `permission_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `type` int(11) NOT NULL,
-  PRIMARY KEY (`permission_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `permission`
---
-
-LOCK TABLES `permission` WRITE;
-/*!40000 ALTER TABLE `permission` DISABLE KEYS */;
-/*!40000 ALTER TABLE `permission` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `permission_menu`
---
-
-DROP TABLE IF EXISTS `permission_menu`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `permission_menu` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `permission_id` bigint(20) NOT NULL,
-  `menu_id` bigint(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `permission_menu`
---
-
-LOCK TABLES `permission_menu` WRITE;
-/*!40000 ALTER TABLE `permission_menu` DISABLE KEYS */;
-/*!40000 ALTER TABLE `permission_menu` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `permission_resource`
---
-
-DROP TABLE IF EXISTS `permission_resource`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `permission_resource` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `permission_id` bigint(20) NOT NULL,
-  `resource_id` bigint(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `permission_resource`
---
-
-LOCK TABLES `permission_resource` WRITE;
-/*!40000 ALTER TABLE `permission_resource` DISABLE KEYS */;
-/*!40000 ALTER TABLE `permission_resource` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `permission_role`
---
-
-DROP TABLE IF EXISTS `permission_role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `permission_role` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `permission_id` bigint(20) NOT NULL,
-  `role_id` bigint(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `permission_role`
---
-
-LOCK TABLES `permission_role` WRITE;
-/*!40000 ALTER TABLE `permission_role` DISABLE KEYS */;
-/*!40000 ALTER TABLE `permission_role` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `resource`
---
-
-DROP TABLE IF EXISTS `resource`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `resource` (
+CREATE TABLE `resource_permission` (
   `resource_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `resource_name` varchar(20) NOT NULL,
   `resource_group_id` bigint(20) NOT NULL,
-  `uri` varchar(100) NOT NULL,
+  `uris` varchar(300) NOT NULL,
   PRIMARY KEY (`resource_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `resource`
+-- Dumping data for table `resource_permission`
 --
 
-LOCK TABLES `resource` WRITE;
-/*!40000 ALTER TABLE `resource` DISABLE KEYS */;
-/*!40000 ALTER TABLE `resource` ENABLE KEYS */;
+LOCK TABLES `resource_permission` WRITE;
+/*!40000 ALTER TABLE `resource_permission` DISABLE KEYS */;
+INSERT INTO `resource_permission` VALUES (1,'用户管理',5,'/system/user,/system/user/add,/systme/user/isNotExist,/system/user/edit'),(2,'资源权限管理1',5,'/system/resourcePermission,/system/resourcePermission/add,/system/resourcePermission/isNotExist,/system/resourcePermission/edit');
+/*!40000 ALTER TABLE `resource_permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `resource_group`
+-- Table structure for table `resource_permission_group`
 --
 
-DROP TABLE IF EXISTS `resource_group`;
+DROP TABLE IF EXISTS `resource_permission_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `resource_group` (
+CREATE TABLE `resource_permission_group` (
   `group_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `group_name` varchar(50) NOT NULL,
   PRIMARY KEY (`group_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `resource_group`
+-- Dumping data for table `resource_permission_group`
 --
 
-LOCK TABLES `resource_group` WRITE;
-/*!40000 ALTER TABLE `resource_group` DISABLE KEYS */;
-/*!40000 ALTER TABLE `resource_group` ENABLE KEYS */;
+LOCK TABLES `resource_permission_group` WRITE;
+/*!40000 ALTER TABLE `resource_permission_group` DISABLE KEYS */;
+INSERT INTO `resource_permission_group` VALUES (3,'借款管理'),(4,'还款管理'),(5,'系统管理6');
+/*!40000 ALTER TABLE `resource_permission_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -236,6 +143,31 @@ LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
 INSERT INTO `role` VALUES (5,'总裁','就是公司的老板啦',1,'2016-03-31 16:34:48',NULL),(6,'副总裁','',1,'2016-03-31 16:56:22',NULL);
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `role_permission`
+--
+
+DROP TABLE IF EXISTS `role_permission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `role_permission` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `role_id` bigint(20) NOT NULL,
+  `permission_type` int(11) NOT NULL,
+  `permission_ids` text COMMENT '权限ID，各URI间用英文逗号(,)隔开',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `role_permission`
+--
+
+LOCK TABLES `role_permission` WRITE;
+/*!40000 ALTER TABLE `role_permission` DISABLE KEYS */;
+/*!40000 ALTER TABLE `role_permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -271,7 +203,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin','96e79218965eb72c92a549dd5a330112','管理员',1,'admin@admin.com','18688888888',NULL,1,'2016-03-23 13:30:37','0:0:0:0:0:0:0:1',NULL,'2016-03-21 18:20:30',NULL),(2,'test','96e79218965eb72c92a549dd5a330112',NULL,6,'test@z1i.com','',NULL,1,NULL,NULL,NULL,'2016-03-29 15:57:54',NULL),(3,'zhu','96e79218965eb72c92a549dd5a330112',NULL,6,'z@h.u','',NULL,1,NULL,NULL,NULL,'2016-03-29 18:36:04',NULL),(4,'t1','96e79218965eb72c92a549dd5a330112',NULL,6,'r1@jls.om','',NULL,1,NULL,NULL,NULL,'2016-04-01 15:06:06',NULL),(5,'t2','96e79218965eb72c92a549dd5a330112',NULL,6,'test@zi.com','',NULL,1,NULL,NULL,NULL,'2016-04-01 15:06:36',NULL),(6,'t3','b34d76a07a0d8b6fcab44d094761efde',NULL,6,'test@zi.com','',NULL,1,NULL,NULL,NULL,'2016-04-01 15:06:48',NULL),(7,'t4','b34d76a07a0d8b6fcab44d094761efde',NULL,6,'test@zi.com','',NULL,1,NULL,NULL,NULL,'2016-04-01 15:06:59',NULL),(8,'t5','b34d76a07a0d8b6fcab44d094761efde',NULL,6,'test@zi.com','',NULL,1,NULL,NULL,NULL,'2016-04-01 15:07:09',NULL),(9,'t6','b34d76a07a0d8b6fcab44d094761efde',NULL,6,'test@zi.com','',NULL,1,NULL,NULL,NULL,'2016-04-01 15:07:21',NULL),(10,'t7','b34d76a07a0d8b6fcab44d094761efde',NULL,6,'test@zi.com','',NULL,1,NULL,NULL,NULL,'2016-04-01 15:07:30',NULL),(11,'t8','b34d76a07a0d8b6fcab44d094761efde',NULL,6,'test@zi.com','',NULL,1,NULL,NULL,NULL,'2016-04-01 15:07:52',NULL),(12,'t9','b34d76a07a0d8b6fcab44d094761efde',NULL,6,'test@zi.com','',NULL,1,NULL,NULL,NULL,'2016-04-01 15:08:04',NULL),(13,'t10','b34d76a07a0d8b6fcab44d094761efde',NULL,6,'test@zi.com','',NULL,1,NULL,NULL,NULL,'2016-04-01 15:08:20',NULL),(14,'t11','b34d76a07a0d8b6fcab44d094761efde',NULL,6,'test@zi.com','',NULL,1,NULL,NULL,NULL,'2016-04-01 15:08:32',NULL);
+INSERT INTO `user` VALUES (1,'admin','96e79218965eb72c92a549dd5a330112','管理员',1,'admin@admin.com','18688888888',NULL,1,'2016-03-23 13:30:37','0:0:0:0:0:0:0:1',NULL,'2016-03-21 18:20:30',NULL),(2,'test','96e79218965eb72c92a549dd5a330112',NULL,6,'test@z1i.com','',NULL,1,NULL,NULL,NULL,'2016-03-29 15:57:54',NULL),(3,'zhu','96e79218965eb72c92a549dd5a330112',NULL,6,'z@h.u','',NULL,1,NULL,NULL,NULL,'2016-03-29 18:36:04',NULL),(4,'t1','96e79218965eb72c92a549dd5a330112',NULL,6,'r1@jls.om','',NULL,1,NULL,NULL,NULL,'2016-04-01 15:06:06',NULL),(5,'t2','96e79218965eb72c92a549dd5a330112',NULL,6,'test@zi.com','',NULL,1,NULL,NULL,NULL,'2016-04-01 15:06:36',NULL),(6,'t3','b34d76a07a0d8b6fcab44d094761efde',NULL,6,'test@zi.com','',NULL,1,NULL,NULL,NULL,'2016-04-01 15:06:48',NULL),(7,'t4','b34d76a07a0d8b6fcab44d094761efde',NULL,6,'test@zi.com','',NULL,1,NULL,NULL,NULL,'2016-04-01 15:06:59',NULL),(8,'t5','b34d76a07a0d8b6fcab44d094761efde',NULL,6,'test@zi.com','',NULL,1,NULL,NULL,NULL,'2016-04-01 15:07:09',NULL),(9,'t6','b34d76a07a0d8b6fcab44d094761efde',NULL,6,'test@zi.com','',NULL,1,NULL,NULL,NULL,'2016-04-01 15:07:21',NULL),(10,'t7','b34d76a07a0d8b6fcab44d094761efde',NULL,6,'test@zi.com','',NULL,1,NULL,NULL,NULL,'2016-04-01 15:07:30',NULL),(11,'t8','b34d76a07a0d8b6fcab44d094761efde',NULL,6,'test@zi.com','',NULL,1,NULL,NULL,NULL,'2016-04-01 15:07:52',NULL),(12,'t9','b34d76a07a0d8b6fcab44d094761efde',NULL,6,'test@zi.com','',NULL,1,NULL,NULL,NULL,'2016-04-01 15:08:04',NULL),(13,'t10','b34d76a07a0d8b6fcab44d094761efde',NULL,6,'test@zi.com','',NULL,1,NULL,NULL,NULL,'2016-04-01 15:08:20',NULL),(14,'t11','b34d76a07a0d8b6fcab44d094761efde',NULL,6,'test@zi.com','1',NULL,1,NULL,NULL,NULL,'2016-04-01 15:08:32','2016-04-05 16:04:28');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -284,4 +216,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-01 18:30:50
+-- Dump completed on 2016-04-05 18:06:40

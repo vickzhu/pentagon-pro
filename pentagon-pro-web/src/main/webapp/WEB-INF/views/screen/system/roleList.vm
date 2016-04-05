@@ -50,6 +50,8 @@
                   <td class="center">$!{role.enable}</td>
                   <td class="center">
 					<a href="#springUrl('/system/role/edit')?roleId=${role.roleId}">编辑</a>
+					<a href="#springUrl('/system/role/resourcePermission')?roleId=${role.roleId}">资源权限</a>
+					<a href="#springUrl('/system/role/menuPermission')?roleId=${role.roleId}">菜单权限</a>
 				  </td>
                 </tr>
 				#end

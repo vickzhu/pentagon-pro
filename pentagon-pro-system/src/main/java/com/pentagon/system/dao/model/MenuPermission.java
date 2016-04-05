@@ -1,6 +1,6 @@
 package com.pentagon.system.dao.model;
 
-public class Menu {
+public class MenuPermission {
     private Long menuId;
 
     private String menuName;

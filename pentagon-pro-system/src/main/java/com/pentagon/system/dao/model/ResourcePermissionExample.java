@@ -3,7 +3,7 @@ package com.pentagon.system.dao.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResourceExample {
+public class ResourcePermissionExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -14,7 +14,7 @@ public class ResourceExample {
 
     protected int rows = -1;
 
-    public ResourceExample() {
+    public ResourcePermissionExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -314,73 +314,73 @@ public class ResourceExample {
             return (Criteria) this;
         }
 
-        public Criteria andUriIsNull() {
-            addCriterion("uri is null");
+        public Criteria andUrisIsNull() {
+            addCriterion("uris is null");
             return (Criteria) this;
         }
 
-        public Criteria andUriIsNotNull() {
-            addCriterion("uri is not null");
+        public Criteria andUrisIsNotNull() {
+            addCriterion("uris is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUriEqualTo(String value) {
-            addCriterion("uri =", value, "uri");
+        public Criteria andUrisEqualTo(String value) {
+            addCriterion("uris =", value, "uris");
             return (Criteria) this;
         }
 
-        public Criteria andUriNotEqualTo(String value) {
-            addCriterion("uri <>", value, "uri");
+        public Criteria andUrisNotEqualTo(String value) {
+            addCriterion("uris <>", value, "uris");
             return (Criteria) this;
         }
 
-        public Criteria andUriGreaterThan(String value) {
-            addCriterion("uri >", value, "uri");
+        public Criteria andUrisGreaterThan(String value) {
+            addCriterion("uris >", value, "uris");
             return (Criteria) this;
         }
 
-        public Criteria andUriGreaterThanOrEqualTo(String value) {
-            addCriterion("uri >=", value, "uri");
+        public Criteria andUrisGreaterThanOrEqualTo(String value) {
+            addCriterion("uris >=", value, "uris");
             return (Criteria) this;
         }
 
-        public Criteria andUriLessThan(String value) {
-            addCriterion("uri <", value, "uri");
+        public Criteria andUrisLessThan(String value) {
+            addCriterion("uris <", value, "uris");
             return (Criteria) this;
         }
 
-        public Criteria andUriLessThanOrEqualTo(String value) {
-            addCriterion("uri <=", value, "uri");
+        public Criteria andUrisLessThanOrEqualTo(String value) {
+            addCriterion("uris <=", value, "uris");
             return (Criteria) this;
         }
 
-        public Criteria andUriLike(String value) {
-            addCriterion("uri like", value, "uri");
+        public Criteria andUrisLike(String value) {
+            addCriterion("uris like", value, "uris");
             return (Criteria) this;
         }
 
-        public Criteria andUriNotLike(String value) {
-            addCriterion("uri not like", value, "uri");
+        public Criteria andUrisNotLike(String value) {
+            addCriterion("uris not like", value, "uris");
             return (Criteria) this;
         }
 
-        public Criteria andUriIn(List<String> values) {
-            addCriterion("uri in", values, "uri");
+        public Criteria andUrisIn(List<String> values) {
+            addCriterion("uris in", values, "uris");
             return (Criteria) this;
         }
 
-        public Criteria andUriNotIn(List<String> values) {
-            addCriterion("uri not in", values, "uri");
+        public Criteria andUrisNotIn(List<String> values) {
+            addCriterion("uris not in", values, "uris");
             return (Criteria) this;
         }
 
-        public Criteria andUriBetween(String value1, String value2) {
-            addCriterion("uri between", value1, value2, "uri");
+        public Criteria andUrisBetween(String value1, String value2) {
+            addCriterion("uris between", value1, value2, "uris");
             return (Criteria) this;
         }
 
-        public Criteria andUriNotBetween(String value1, String value2) {
-            addCriterion("uri not between", value1, value2, "uri");
+        public Criteria andUrisNotBetween(String value1, String value2) {
+            addCriterion("uris not between", value1, value2, "uris");
             return (Criteria) this;
         }
     }

@@ -33,7 +33,7 @@
 			<property name="enableSubPackages" value="true"/> 
 			<property name="rootInterface" value="com.gandalf.framework.mybatis.BaseMapper"/>
 		</javaClientGenerator> 
-		
+		<!-- 
 		<table  tableName="user" domainObjectName="User"> 
 			<property name="suppressAllComments" value="true"/> 
 		    <property name="suppressDate" value="true"/>
@@ -48,43 +48,28 @@
 			<property name="suppressAllComments" value="true"/> 
 		    <property name="suppressDate" value="true"/>
 		    <generatedKey column="role_id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		<table  tableName="resource" domainObjectName="Resource"> 
+		</table>		 
+		<table  tableName="resource_permission" domainObjectName="ResourcePermission"> 
 			<property name="suppressAllComments" value="true"/> 
 		    <property name="suppressDate" value="true"/>
 		    <generatedKey column="resource_id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
 		</table>
-		<table  tableName="resource_group" domainObjectName="ResourceGroup"> 
+		<table  tableName="resource_permission_group" domainObjectName="ResourcePermissionGroup"> 
 			<property name="suppressAllComments" value="true"/> 
 		    <property name="suppressDate" value="true"/>
 		    <generatedKey column="group_id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
 		</table>
-		<table  tableName="menu" domainObjectName="Menu"> 
+		<table  tableName="role_permission" domainObjectName="RolePermission"> 
+			<property name="suppressAllComments" value="true"/> 
+		    <property name="suppressDate" value="true"/>
+		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
+		</table>
+		 -->
+		<table  tableName="menu_permission" domainObjectName="MenuPermission"> 
 			<property name="suppressAllComments" value="true"/> 
 		    <property name="suppressDate" value="true"/>
 		    <generatedKey column="menu_id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
 		</table>
-		<table  tableName="permission" domainObjectName="Permission"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="permission_id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		<table  tableName="permission_resource" domainObjectName="PermissionResource"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		<table  tableName="permission_menu" domainObjectName="PermissionMenu"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		<table  tableName="permission_role" domainObjectName="PermissionRole"> 
-			<property name="suppressAllComments" value="true"/> 
-		    <property name="suppressDate" value="true"/>
-		    <generatedKey column="id"  sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
-		</table>
-		
 	</context>
 	
 </generatorConfiguration> 

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.pentagon.system.dao.mapper.PermissionMenuMapper" >
-  <resultMap id="BaseResultMap" type="com.pentagon.system.dao.model.PermissionMenu" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="permission_id" property="permissionId" jdbcType="BIGINT" />
-    <result column="menu_id" property="menuId" jdbcType="BIGINT" />
+<mapper namespace="com.pentagon.system.dao.mapper.MenuPermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.pentagon.system.dao.model.MenuPermission" >
+    <id column="menu_id" property="menuId" jdbcType="BIGINT" />
+    <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+    <result column="uri" property="uri" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,15 +66,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, permission_id, menu_id
+    menu_id, menu_name, uri, parent_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pentagon.system.dao.model.PermissionMenuExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pentagon.system.dao.model.MenuPermissionExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from permission_menu
+    from menu_permission
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,65 +88,76 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from permission_menu
-    where id = #{id,jdbcType=BIGINT}
+    from menu_permission
+    where menu_id = #{menuId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from permission_menu
-    where id = #{id,jdbcType=BIGINT}
+    delete from menu_permission
+    where menu_id = #{menuId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.pentagon.system.dao.model.PermissionMenuExample" >
-    delete from permission_menu
+  <delete id="deleteByExample" parameterType="com.pentagon.system.dao.model.MenuPermissionExample" >
+    delete from menu_permission
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.pentagon.system.dao.model.PermissionMenu" >
-    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+  <insert id="insert" parameterType="com.pentagon.system.dao.model.MenuPermission" >
+    <selectKey resultType="java.lang.Long" keyProperty="menuId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into permission_menu (permission_id, menu_id)
-    values (#{permissionId,jdbcType=BIGINT}, #{menuId,jdbcType=BIGINT})
+    insert into menu_permission (menu_name, uri, parent_id
+      )
+    values (#{menuName,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.pentagon.system.dao.model.PermissionMenu" >
-    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+  <insert id="insertSelective" parameterType="com.pentagon.system.dao.model.MenuPermission" >
+    <selectKey resultType="java.lang.Long" keyProperty="menuId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into permission_menu
+    insert into menu_permission
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="permissionId != null" >
-        permission_id,
+      <if test="menuName != null" >
+        menu_name,
       </if>
-      <if test="menuId != null" >
-        menu_id,
+      <if test="uri != null" >
+        uri,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="permissionId != null" >
-        #{permissionId,jdbcType=BIGINT},
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
       </if>
-      <if test="menuId != null" >
-        #{menuId,jdbcType=BIGINT},
+      <if test="uri != null" >
+        #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.pentagon.system.dao.model.PermissionMenuExample" resultType="java.lang.Integer" >
-    select count(*) from permission_menu
+  <select id="countByExample" parameterType="com.pentagon.system.dao.model.MenuPermissionExample" resultType="java.lang.Integer" >
+    select count(*) from menu_permission
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update permission_menu
+    update menu_permission
     <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=BIGINT},
-      </if>
-      <if test="record.permissionId != null" >
-        permission_id = #{record.permissionId,jdbcType=BIGINT},
-      </if>
       <if test="record.menuId != null" >
         menu_id = #{record.menuId,jdbcType=BIGINT},
+      </if>
+      <if test="record.menuName != null" >
+        menu_name = #{record.menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uri != null" >
+        uri = #{record.uri,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=BIGINT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -153,30 +165,35 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update permission_menu
-    set id = #{record.id,jdbcType=BIGINT},
-      permission_id = #{record.permissionId,jdbcType=BIGINT},
-      menu_id = #{record.menuId,jdbcType=BIGINT}
+    update menu_permission
+    set menu_id = #{record.menuId,jdbcType=BIGINT},
+      menu_name = #{record.menuName,jdbcType=VARCHAR},
+      uri = #{record.uri,jdbcType=VARCHAR},
+      parent_id = #{record.parentId,jdbcType=BIGINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.pentagon.system.dao.model.PermissionMenu" >
-    update permission_menu
+  <update id="updateByPrimaryKeySelective" parameterType="com.pentagon.system.dao.model.MenuPermission" >
+    update menu_permission
     <set >
-      <if test="permissionId != null" >
-        permission_id = #{permissionId,jdbcType=BIGINT},
+      <if test="menuName != null" >
+        menu_name = #{menuName,jdbcType=VARCHAR},
       </if>
-      <if test="menuId != null" >
-        menu_id = #{menuId,jdbcType=BIGINT},
+      <if test="uri != null" >
+        uri = #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=BIGINT},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where menu_id = #{menuId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.pentagon.system.dao.model.PermissionMenu" >
-    update permission_menu
-    set permission_id = #{permissionId,jdbcType=BIGINT},
-      menu_id = #{menuId,jdbcType=BIGINT}
-    where id = #{id,jdbcType=BIGINT}
+  <update id="updateByPrimaryKey" parameterType="com.pentagon.system.dao.model.MenuPermission" >
+    update menu_permission
+    set menu_name = #{menuName,jdbcType=VARCHAR},
+      uri = #{uri,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=BIGINT}
+    where menu_id = #{menuId,jdbcType=BIGINT}
   </update>
 </mapper>

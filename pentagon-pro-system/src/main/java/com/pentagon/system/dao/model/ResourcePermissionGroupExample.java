@@ -3,7 +3,7 @@ package com.pentagon.system.dao.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResourceGroupExample {
+public class ResourcePermissionGroupExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -14,7 +14,7 @@ public class ResourceGroupExample {
 
     protected int rows = -1;
 
-    public ResourceGroupExample() {
+    public ResourcePermissionGroupExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

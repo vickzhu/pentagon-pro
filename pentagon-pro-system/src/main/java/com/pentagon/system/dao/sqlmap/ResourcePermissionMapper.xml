@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.pentagon.system.dao.mapper.MenuMapper" >
-  <resultMap id="BaseResultMap" type="com.pentagon.system.dao.model.Menu" >
-    <id column="menu_id" property="menuId" jdbcType="BIGINT" />
-    <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
-    <result column="uri" property="uri" jdbcType="VARCHAR" />
-    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+<mapper namespace="com.pentagon.system.dao.mapper.ResourcePermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.pentagon.system.dao.model.ResourcePermission" >
+    <id column="resource_id" property="resourceId" jdbcType="BIGINT" />
+    <result column="resource_name" property="resourceName" jdbcType="VARCHAR" />
+    <result column="resource_group_id" property="resourceGroupId" jdbcType="BIGINT" />
+    <result column="uris" property="uris" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,15 +66,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    menu_id, menu_name, uri, parent_id
+    resource_id, resource_name, resource_group_id, uris
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pentagon.system.dao.model.MenuExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pentagon.system.dao.model.ResourcePermissionExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from menu
+    from resource_permission
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,76 +88,76 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from menu
-    where menu_id = #{menuId,jdbcType=BIGINT}
+    from resource_permission
+    where resource_id = #{resourceId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from menu
-    where menu_id = #{menuId,jdbcType=BIGINT}
+    delete from resource_permission
+    where resource_id = #{resourceId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.pentagon.system.dao.model.MenuExample" >
-    delete from menu
+  <delete id="deleteByExample" parameterType="com.pentagon.system.dao.model.ResourcePermissionExample" >
+    delete from resource_permission
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.pentagon.system.dao.model.Menu" >
-    <selectKey resultType="java.lang.Long" keyProperty="menuId" order="AFTER" >
+  <insert id="insert" parameterType="com.pentagon.system.dao.model.ResourcePermission" >
+    <selectKey resultType="java.lang.Long" keyProperty="resourceId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into menu (menu_name, uri, parent_id
+    insert into resource_permission (resource_name, resource_group_id, uris
       )
-    values (#{menuName,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}
+    values (#{resourceName,jdbcType=VARCHAR}, #{resourceGroupId,jdbcType=BIGINT}, #{uris,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.pentagon.system.dao.model.Menu" >
-    <selectKey resultType="java.lang.Long" keyProperty="menuId" order="AFTER" >
+  <insert id="insertSelective" parameterType="com.pentagon.system.dao.model.ResourcePermission" >
+    <selectKey resultType="java.lang.Long" keyProperty="resourceId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into menu
+    insert into resource_permission
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="menuName != null" >
-        menu_name,
+      <if test="resourceName != null" >
+        resource_name,
       </if>
-      <if test="uri != null" >
-        uri,
+      <if test="resourceGroupId != null" >
+        resource_group_id,
       </if>
-      <if test="parentId != null" >
-        parent_id,
+      <if test="uris != null" >
+        uris,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="menuName != null" >
-        #{menuName,jdbcType=VARCHAR},
+      <if test="resourceName != null" >
+        #{resourceName,jdbcType=VARCHAR},
       </if>
-      <if test="uri != null" >
-        #{uri,jdbcType=VARCHAR},
+      <if test="resourceGroupId != null" >
+        #{resourceGroupId,jdbcType=BIGINT},
       </if>
-      <if test="parentId != null" >
-        #{parentId,jdbcType=BIGINT},
+      <if test="uris != null" >
+        #{uris,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.pentagon.system.dao.model.MenuExample" resultType="java.lang.Integer" >
-    select count(*) from menu
+  <select id="countByExample" parameterType="com.pentagon.system.dao.model.ResourcePermissionExample" resultType="java.lang.Integer" >
+    select count(*) from resource_permission
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update menu
+    update resource_permission
     <set >
-      <if test="record.menuId != null" >
-        menu_id = #{record.menuId,jdbcType=BIGINT},
+      <if test="record.resourceId != null" >
+        resource_id = #{record.resourceId,jdbcType=BIGINT},
       </if>
-      <if test="record.menuName != null" >
-        menu_name = #{record.menuName,jdbcType=VARCHAR},
+      <if test="record.resourceName != null" >
+        resource_name = #{record.resourceName,jdbcType=VARCHAR},
       </if>
-      <if test="record.uri != null" >
-        uri = #{record.uri,jdbcType=VARCHAR},
+      <if test="record.resourceGroupId != null" >
+        resource_group_id = #{record.resourceGroupId,jdbcType=BIGINT},
       </if>
-      <if test="record.parentId != null" >
-        parent_id = #{record.parentId,jdbcType=BIGINT},
+      <if test="record.uris != null" >
+        uris = #{record.uris,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -165,35 +165,35 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update menu
-    set menu_id = #{record.menuId,jdbcType=BIGINT},
-      menu_name = #{record.menuName,jdbcType=VARCHAR},
-      uri = #{record.uri,jdbcType=VARCHAR},
-      parent_id = #{record.parentId,jdbcType=BIGINT}
+    update resource_permission
+    set resource_id = #{record.resourceId,jdbcType=BIGINT},
+      resource_name = #{record.resourceName,jdbcType=VARCHAR},
+      resource_group_id = #{record.resourceGroupId,jdbcType=BIGINT},
+      uris = #{record.uris,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.pentagon.system.dao.model.Menu" >
-    update menu
+  <update id="updateByPrimaryKeySelective" parameterType="com.pentagon.system.dao.model.ResourcePermission" >
+    update resource_permission
     <set >
-      <if test="menuName != null" >
-        menu_name = #{menuName,jdbcType=VARCHAR},
+      <if test="resourceName != null" >
+        resource_name = #{resourceName,jdbcType=VARCHAR},
       </if>
-      <if test="uri != null" >
-        uri = #{uri,jdbcType=VARCHAR},
+      <if test="resourceGroupId != null" >
+        resource_group_id = #{resourceGroupId,jdbcType=BIGINT},
       </if>
-      <if test="parentId != null" >
-        parent_id = #{parentId,jdbcType=BIGINT},
+      <if test="uris != null" >
+        uris = #{uris,jdbcType=VARCHAR},
       </if>
     </set>
-    where menu_id = #{menuId,jdbcType=BIGINT}
+    where resource_id = #{resourceId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.pentagon.system.dao.model.Menu" >
-    update menu
-    set menu_name = #{menuName,jdbcType=VARCHAR},
-      uri = #{uri,jdbcType=VARCHAR},
-      parent_id = #{parentId,jdbcType=BIGINT}
-    where menu_id = #{menuId,jdbcType=BIGINT}
+  <update id="updateByPrimaryKey" parameterType="com.pentagon.system.dao.model.ResourcePermission" >
+    update resource_permission
+    set resource_name = #{resourceName,jdbcType=VARCHAR},
+      resource_group_id = #{resourceGroupId,jdbcType=BIGINT},
+      uris = #{uris,jdbcType=VARCHAR}
+    where resource_id = #{resourceId,jdbcType=BIGINT}
   </update>
 </mapper>

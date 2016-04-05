@@ -1,13 +1,13 @@
 package com.pentagon.system.dao.model;
 
-public class Resource {
+public class ResourcePermission {
     private Long resourceId;
 
     private String resourceName;
 
     private Long resourceGroupId;
 
-    private String uri;
+    private String uris;
 
     public Long getResourceId() {
         return resourceId;
@@ -33,11 +33,11 @@ public class Resource {
         this.resourceGroupId = resourceGroupId;
     }
 
-    public String getUri() {
-        return uri;
+    public String getUris() {
+        return uris;
     }
 
-    public void setUri(String uri) {
-        this.uri = uri == null ? null : uri.trim();
+    public void setUris(String uris) {
+        this.uris = uris == null ? null : uris.trim();
     }
 }

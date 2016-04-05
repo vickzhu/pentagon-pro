@@ -9,37 +9,21 @@
         <div class="span6">
           <div class="widget-box">
             <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-              <h5>用户信息</h5>
+              <h5>资源权限组</h5>
             </div>
             <div class="widget-content nopadding">
-              <form id="role_form" method="post" class="form-horizontal" novalidate="novalidate">
+              <form id="resource_form" method="post" class="form-horizontal" novalidate="novalidate">
 				$!{tokenTool.hiddenField}
-				<input type="hidden" name="roleId" value="${role.roleId}" />
+				<input type="hidden" name="groupId" value="${group.groupId}" />
                 <div class="control-group">
-                  <label class="control-label">角色名 :</label>
+                  <label class="control-label">权限组名 :</label>
                   <div class="controls">
-                    <input id="roleName" name="roleName" type="text" value="$!{role.roleName}" placeholder="Role name" readonly />
-                  </div>
-                </div>
-				<div class="control-group">
-                  <label class="control-label">角色描述:</label>
-                  <div class="controls">
-					<textarea id="roleDesc" name="roleDesc">$!{role.roleDesc}</textarea>
-                  </div>
-                </div>
-                <div class="control-group">
-                  <label class="control-label">是否可用 :</label>
-                  <div class="controls">
-                    <label>
-						<input type="radio" name="enable" value="1" #if($!{role.enable}==1)checked#end />可用
-					</label>
-					<label>
-						<input type="radio" name="enable" value="0" #if($!{role.enable}==0)checked#end/>不可用
-					</label>
+                    <input id="groupName" name="groupName" type="text" value="$!{group.groupName}" placeholder="Group name" />
                   </div>
                 </div>
                 <div class="form-actions">
                   <button type="submit" class="btn btn-success">保存</button>
+				  <button type="button" class="btn btn-inverse" onclick="window.location.href='#springUrl('/system/resourcePermissionGroup')'">返回列表</button>
                 </div>
               </form>
             </div>
@@ -53,7 +37,13 @@
 <script src="#resources('layer/layer.js')"></script>
 <script type="text/javascript">
 	$(function(){
-		$("#role_form").validate({
+		$("#resource_form").validate({
+    		groupName:{
+    			required:true
+    		},
+			messages:{
+				required:"请输入权限组名"
+			},
     		errorClass: "help-inline",
     		errorElement: "span",
     		highlight:function(element, errorClass, validClass) {
@@ -65,9 +55,9 @@
     			$(element).parents('.control-group').addClass('success');
     		},
 			submitHandler:function(form){
-				jQuery.post("#springUrl('/system/role/edit')",$(form).serialize(),function(data){
-					var msg = data==true?"更新成功！":"更新失败！";
-					var icon = data==true?6:5
+				jQuery.post("#springUrl('/system/resourcePermissionGroup/edit')",$(form).serialize(),function(data){
+					var msg = data?"更新成功！":"更新失败！";
+					var icon = data?6:5;
 					layer.alert(msg, {
                       skin: 'layui-layer-molv',
 					  icon: icon,

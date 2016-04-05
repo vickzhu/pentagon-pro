@@ -9,33 +9,15 @@
         <div class="span6">
           <div class="widget-box">
             <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-              <h5>用户信息</h5>
+              <h5>资源组</h5>
             </div>
             <div class="widget-content nopadding">
-              <form id="role_form" method="post" class="form-horizontal" novalidate="novalidate">
+              <form action="#springUrl('/system/resourcePermissionGroup/add')" id="resource_group_form" method="post" class="form-horizontal" novalidate="novalidate">
 				$!{tokenTool.hiddenField}
-				<input type="hidden" name="roleId" value="${role.roleId}" />
                 <div class="control-group">
-                  <label class="control-label">角色名 :</label>
+                  <label class="control-label"><span class="star">*</span>资源组名:</label>
                   <div class="controls">
-                    <input id="roleName" name="roleName" type="text" value="$!{role.roleName}" placeholder="Role name" readonly />
-                  </div>
-                </div>
-				<div class="control-group">
-                  <label class="control-label">角色描述:</label>
-                  <div class="controls">
-					<textarea id="roleDesc" name="roleDesc">$!{role.roleDesc}</textarea>
-                  </div>
-                </div>
-                <div class="control-group">
-                  <label class="control-label">是否可用 :</label>
-                  <div class="controls">
-                    <label>
-						<input type="radio" name="enable" value="1" #if($!{role.enable}==1)checked#end />可用
-					</label>
-					<label>
-						<input type="radio" name="enable" value="0" #if($!{role.enable}==0)checked#end/>不可用
-					</label>
+                    <input id="groupName" name="groupName" type="text" placeholder="Group name" />
                   </div>
                 </div>
                 <div class="form-actions">
@@ -50,10 +32,30 @@
 </div>
 <script src="#resources('js/jquery.uniform.js')"></script> 
 <script src="#resources('js/jquery.validate.js')"></script>
-<script src="#resources('layer/layer.js')"></script>
 <script type="text/javascript">
 	$(function(){
-		$("#role_form").validate({
+		$("#resource_group_form").validate({
+    		rules:{
+				groupName:{
+					required:true,
+					remote:{
+						type:"get",
+                    	url: "#springUrl('/system/resourcePermissionGroup/isNotExist')",
+						data:{
+                            groupName:function() {
+                                return $("#groupName").val();
+                            }
+                        },
+						dataType: "json"
+					}					
+				}
+    		},
+			messages:{
+				groupName:{
+					required:"请输入资源组名！",
+					remote:"该资源组已存在!"
+				}
+			},
     		errorClass: "help-inline",
     		errorElement: "span",
     		highlight:function(element, errorClass, validClass) {
@@ -63,20 +65,7 @@
     		unhighlight: function(element, errorClass, validClass) {
     			$(element).parents('.control-group').removeClass('error');
     			$(element).parents('.control-group').addClass('success');
-    		},
-			submitHandler:function(form){
-				jQuery.post("#springUrl('/system/role/edit')",$(form).serialize(),function(data){
-					var msg = data==true?"更新成功！":"更新失败！";
-					var icon = data==true?6:5
-					layer.alert(msg, {
-                      skin: 'layui-layer-molv',
-					  icon: icon,
-					  closeBtn: 0
-                    }, function(){
-						window.location.reload();
-                    });
-				});
-			}
+    		}
     	});
 	})
 </script>
