@@ -14,18 +14,20 @@
 		  <div class="widget-content nopadding">
 			<form id="searchForm" action="#springUrl('/system/user')" method="get" class="form-horizontal">
 				<input type="hidden" id="curPage" name="curPage" value="$!{curPage}" />
-                <div class="dataTables_length">
-					<label style="padding:5px;display:inline-block;">资源名：
+                <div class="search_option">
+					<span>
+                        <label>资源名：</label>
 						<input id="resourceName" name="resourceName" type="text" value="$!{resourceName}"/>
-					</label>
-					<label class="select2-container" style="padding:5px;display:inline-block;">资源组：
+					</span>
+					<span>
+                        <label>资源组：</label>
 						<select name="role">
 							<option value="">请选择</option>
 							#foreach($entry in $groupMap.entrySet())
 								<option value="${entry.key}" #if($role == ${entry.key})selected#end>${entry.value}</option>	
 							#end
 						</select>
-					</label>
+					</span>
                     <span style="display:inline-block">
                         <button type="button" class="btn btn-success" onclick="gotoPage(1)">搜索</button>
                         <button type="button" class="btn btn-primary" onclick="location.href='#springUrl("/system/resourcePermission/add")'">添加资源</button>

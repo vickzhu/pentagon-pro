@@ -27,10 +27,10 @@ function Pagination(currentPage, totalPage, callback, style) {
 		}
 		var str = "<form id='form_pagination' onsubmit='if(document.getElementById(\"pagination_input\").value.match(\"^\\\\d+$\")==null||document.getElementById(\"pagination_input\").value==\"0\"){alert(\"页码错误\");return false;} if(document.getElementById(\"pagination_input\").value>"+this.totalPage+"){window.pagination_callback("+this.totalPage+");return false;} window.pagination_callback(document.getElementById(\"pagination_input\").value); return false;' action='"+this.href+"' method='post'>";
 		str+="<div style='text-align: right;height:25px;'>";
-		str+="<span style='font-size:14px;color: "+this.style.fontColor+"; height: 25px; '>共"+this.totalPage+"页</span>&nbsp;";
+		str+="<span style='font-size:14px;color: "+this.style.fontColor+"; height: 25px; '>第"+this.currentPage+"/"+this.totalPage+"页</span>&nbsp;";
 		if(this.currentPage>1){
-			str+="<input onclick='window.pagination_callback(1)' type='button' value='首页' style='cursor:pointer;background: "+this.style.bgColor+"; width: 40px; color: "+this.style.fontColor+"; height: 25px; border: 1px solid "+this.style.borderColor+";'/>";
-			str+=" <input onclick='window.pagination_callback("+(this.currentPage-1)+")' type='button' value='上一页' style='cursor:pointer; background: "+this.style.bgColor+"; width: 51px; color: "+this.style.fontColor+"; height: 25px; border: 1px solid "+this.style.borderColor+";'/> ";
+			str+="<span onclick='window.pagination_callback(1)' style='cursor:pointer;background: "+this.style.bgColor+"; color: "+this.style.fontColor+"; padding:2px 5px; border: 1px solid "+this.style.borderColor+";display:inline-block;'>首页</span>";
+			str+=" <span onclick='window.pagination_callback("+(this.currentPage-1)+")' style='cursor:pointer; background: "+this.style.bgColor+"; color: "+this.style.fontColor+"; padding:2px 5px; border: 1px solid "+this.style.borderColor+";display:inline-block;'>上一页</span> ";
 		}
 		var start = 1;
 		var end = 0;
@@ -41,18 +41,11 @@ function Pagination(currentPage, totalPage, callback, style) {
 		}else{
 			end = this.totalPage;
 		}
-		for (i = (end-this.btnCount+1)>0?(end-this.btnCount+1):1; i <= end; i++) {
-			if(this.currentPage==i){
-				str+="<input type='button' value='"+i+"' style='background: "+this.style.selectedBgColor+"; width: 25px; color: "+this.style.selectedFontColor+"; height: 25px; border: 1px solid "+this.style.selectedBorderColor+";'/>";
-			}else{
-				str+="<input onclick='window.pagination_callback("+i+")' type='button' value='"+i+"' style='cursor:pointer;background: "+this.style.bgColor+"; width: 25px; color: "+this.style.fontColor+"; height: 25px; border: 1px solid "+this.style.borderColor+";'/>";
-			}
-		}
 		if(this.currentPage<this.totalPage){
-			str+=" <input onclick='window.pagination_callback("+(this.currentPage+1)+")' type='button' value='下一页' style='cursor:pointer; background: "+this.style.bgColor+"; width: 51px; color: "+this.style.fontColor+"; height: 25px; border: 1px solid "+this.style.borderColor+";'/>";
-			str+=" <input onclick='window.pagination_callback("+this.totalPage+")' type='button' value='尾页' style='cursor:pointer;background: "+this.style.bgColor+"; width: 40px; color: "+this.style.fontColor+"; height: 25px; border: 1px solid "+this.style.borderColor+";'/>";
+			str+=" <span onclick='window.pagination_callback("+(this.currentPage+1)+")' style='cursor:pointer; background: "+this.style.bgColor+"; color: "+this.style.fontColor+"; border: 1px solid "+this.style.borderColor+";padding:2px 5px;display:inline-block;'>下一页</span>";
+			str+=" <span onclick='window.pagination_callback("+this.totalPage+")' style='cursor:pointer;background: "+this.style.bgColor+"; color: "+this.style.fontColor+"; border: 1px solid "+this.style.borderColor+";padding:2px 5px;display:inline-block;'>尾页</span>";
 		}
-		str+=" <input id='pagination_input' name='page' type='text' style='width: 30px; border: 1px solid "+this.style.borderColor+";vertical-align: top;padding:0;'/>";
+		str+=" <input id='pagination_input' name='page' type='text' style='width: 30px;"+this.style.borderColor+";margin:0px;padding:0px;'/>";
 		str+="</div></form>";
 		return str;
 	}

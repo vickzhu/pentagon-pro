@@ -36,9 +36,10 @@
 	<li class="submenu active"> <a href="#"><i class="icon icon-cog"></i> <span>系统管理</span><span class="label label-important">4</span></a>
       <ul>
         <li><a href="#springUrl('/system/user')">用户管理</a></li>
-        <li><a href="error404.html">用户组管理</a></li>
+        <li><a href="#springUrl('/system/resourcePermissionGroup')">资源组管理</a></li>
+		<li><a href="#springUrl('/system/resourcePermission')">资源管理</a></li>
         <li><a href="#springUrl('/system/role')">角色管理</a></li>
-        <li><a href="error500.html">资源管理</a></li>
+        <li><a href="#springUrl('/system/menu')">菜单管理</a></li>
       </ul>
     </li>
     <li class="content"> <span>Monthly Bandwidth Transfer</span>

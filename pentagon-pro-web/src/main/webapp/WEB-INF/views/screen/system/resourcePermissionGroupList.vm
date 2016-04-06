@@ -56,8 +56,8 @@
 		function doDel(groupId){
 			var params = {groupId: groupId, $!{tokenTool.getTokenKey()}:"$!{tokenTool.getToken()}"};
 			jQuery.post("#springUrl('/system/resourcePermissionGroup/del')",params,function(data){
-				var msg = data?"删除成功！":"删除失败！";
-				var icon = data?6:5;
+				var msg = data.success?"删除成功！":"删除失败！"+data.message;
+				var icon = data.success?6:5;
 				layer.alert(msg, {
                   skin: 'layui-layer-molv',
 				  icon: icon,

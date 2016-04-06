@@ -1,0 +1,36 @@
+####################
+##    分配资源权限        ##
+####################
+<link rel="stylesheet" href="#resources('css/uniform.css')" />
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 首页</a> <a href="#">系统管理</a> <a href="#" class="current">角色管理</a> </div>
+    <h1>[$!{role.roleName}]资源权限分配</h1>
+  </div>
+  <div class="container-fluid">
+	<hr />
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+			#foreach($group in $resourceGroupList)
+				<div class="widget-title">
+					<span class="icon">
+						<input type="checkbox"/>
+					</span>
+                    <h5>$!{group.groupName}</h5>
+        			<span class="label label-info"></span>
+                  </div>
+                <div class="widget-content">
+					#foreach($entry in $resourceMap.get($!{group.groupId}))
+						<label>
+							<input type="checkbox" name="radios" value="$!{entry.resourceId}">$!{entry.resourceName}
+						</label>
+					#end
+				</div>
+			#end
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="#resources('js/jquery.uniform.js')"></script>

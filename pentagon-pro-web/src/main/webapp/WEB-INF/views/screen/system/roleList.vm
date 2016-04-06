@@ -13,22 +13,20 @@
           </div>
 		  <div class="widget-content nopadding">
 			<form action="#" method="get" class="form-horizontal">
-                <div class="control-group">
-				  <label class="control-label">状态</label>
-                  <div class="controls">
-                    <select name="enable">
-                      <option>First option</option>
-                      <option>Second option</option>
-                      <option>Third option</option>
-                      <option>Fourth option</option>
-                      <option>Fifth option</option>
-                      <option>Sixth option</option>
-                      <option>Seventh option</option>
-                      <option>Eighth option</option>
-                    </select>
-					<button type="submit" class="btn btn-success">搜索</button>
-					<button type="button" class="btn btn-primary" onclick="location.href='#springUrl("/system/role/add")'">添加角色</button>
-                  </div>
+				<input type="hidden" id="curPage" name="curPage" value="$!{curPage}" />
+                <div class="search_option">
+					<span>
+                        <label>状态：</label>
+                        <select name="enable">
+    						<option value="">请选择</option>
+    						<option value="1">启用</option>
+    						<option value="0">禁用</option>
+                        </select>
+					</span>
+    				<span>
+    					<button type="submit" class="btn btn-success">搜索</button>
+    					<button type="button" class="btn btn-primary" onclick="location.href='#springUrl("/system/role/add")'">添加角色</button>
+					</span>
                 </div>
 			</form>
           </div>
@@ -38,7 +36,7 @@
                 <tr>
                   <th>编号</th>
                   <th>角色</th>
-                  <th>是否可用</th>
+                  <th>状态</th>
                   <th>操作</th>
                 </tr>
               </thead>
@@ -47,7 +45,7 @@
                 <tr>
                   <td>$!{role.roleId}</td>
                   <td>$!{role.roleName}</td>
-                  <td class="center">$!{role.enable}</td>
+                  <td class="center">#showEnable($!{role.enable})</td>
                   <td class="center">
 					<a href="#springUrl('/system/role/edit')?roleId=${role.roleId}">编辑</a>
 					<a href="#springUrl('/system/role/resourcePermission')?roleId=${role.roleId}">资源权限</a>
@@ -57,17 +55,6 @@
 				#end
               </tbody>
             </table>
-    		<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
-    			<div class="dataTables_paginate fg-buttonset ui-buttonset fg-buttonset-multi ui-buttonset-multi paging_full_numbers" id="DataTables_Table_0_paginate">
-    				<a tabindex="0" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default ui-state-disabled" id="DataTables_Table_0_first">First</a>
-    				<a tabindex="0" class="previous fg-button ui-button ui-state-default ui-state-disabled" id="DataTables_Table_0_previous">Previous</a>
-    				<span>
-    					<a tabindex="0" class="fg-button ui-button ui-state-default ui-state-disabled">1</a><a tabindex="0" class="fg-button ui-button ui-state-default">2</a><a tabindex="0" class="fg-button ui-button ui-state-default">3</a><a tabindex="0" class="fg-button ui-button ui-state-default">4</a><a tabindex="0" class="fg-button ui-button ui-state-default">5</a>
-    				</span>
-    				<a tabindex="0" class="next fg-button ui-button ui-state-default" id="DataTables_Table_0_next">Next</a>
-    				<a tabindex="0" class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default" id="DataTables_Table_0_last">Last</a>
-    			</div>
-    		  </div>
 			</div>
           </div>
         </div>
