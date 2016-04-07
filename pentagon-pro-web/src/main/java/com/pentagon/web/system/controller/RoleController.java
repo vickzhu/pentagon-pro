@@ -20,15 +20,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gandalf.framework.constant.SymbolConstant;
 import com.gandalf.framework.util.StringUtil;
+import com.gandalf.framework.web.tool.AjaxResult;
+import com.pentagon.system.common.PermissionType;
 import com.pentagon.system.dao.model.MenuPermission;
 import com.pentagon.system.dao.model.ResourcePermission;
 import com.pentagon.system.dao.model.ResourcePermissionGroup;
 import com.pentagon.system.dao.model.Role;
 import com.pentagon.system.dao.model.RoleExample;
+import com.pentagon.system.dao.model.RolePermission;
 import com.pentagon.system.service.MenuPermissionService;
 import com.pentagon.system.service.ResourcePermissionGroupService;
 import com.pentagon.system.service.ResourcePermissionService;
+import com.pentagon.system.service.RolePermissionService;
 import com.pentagon.system.service.RoleService;
 
 @Controller
@@ -45,6 +50,8 @@ public class RoleController {
     private ResourcePermissionGroupService resourceGroupService;
     @Resource
     private MenuPermissionService          menuService;
+    @Resource
+    private RolePermissionService          rolePermissionService;
 
     private static int                     pageSize = 10;
 
@@ -148,6 +155,7 @@ public class RoleController {
     public ModelAndView assignRezPerm(long roleId) {
         List<ResourcePermission> resourceList = resourceService.selectByExample(null);
         List<ResourcePermissionGroup> resourceGroupList = resourceGroupService.selectByExample(null);
+        RolePermission permission = rolePermissionService.selectByPermissionType(roleId, PermissionType.RESOURCE);
         Map<Long, List<ResourcePermission>> resourceMap = new HashMap<Long, List<ResourcePermission>>();
         for (ResourcePermission resource : resourceList) {
             long groupId = resource.getResourceGroupId();
@@ -158,12 +166,43 @@ public class RoleController {
             }
             rl.add(resource);
         }
+        Map<Long, String> permissionMap = new HashMap<Long, String>();
+        String permissionStr = permission.getPermissionIds();
+        if (StringUtil.isNotBlank(permissionStr)) {
+            String[] permissionArr = permissionStr.split(SymbolConstant.COMMA);
+            for (String str : permissionArr) {
+                permissionMap.put(Long.valueOf(str), str);
+            }
+        }
         Role role = roleService.selectByPrimaryKey(roleId);
         ModelAndView mav = new ModelAndView("system/roleAssignRezPerm");
         mav.addObject("resourceGroupList", resourceGroupList);
         mav.addObject("resourceMap", resourceMap);
+        mav.addObject("permissionMap", permissionMap);
         mav.addObject("role", role);
         return mav;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/resourcePermission", method = RequestMethod.POST)
+    public AjaxResult doAssignRezPerm(HttpServletRequest request, Long roleId) {
+        String[] resourceId = request.getParameterValues("resourceId");
+        String resourceIds = StringUtil.join(resourceId, SymbolConstant.COMMA);
+        RolePermission rolePermission = rolePermissionService.selectByPermissionType(roleId, PermissionType.RESOURCE);
+        AjaxResult result = null;
+        if (rolePermission == null) {
+            rolePermission = new RolePermission();
+            rolePermission.setRoleId(roleId);
+            rolePermission.setPermissionIds(resourceIds);
+            rolePermission.setPermissionType(PermissionType.RESOURCE.getCode());
+            int count = rolePermissionService.insert(rolePermission);
+            result = new AjaxResult(count == 1, null);
+        } else {
+            rolePermission.setPermissionIds(resourceIds);
+            int count = rolePermissionService.updateByPrimaryKey(rolePermission);
+            result = new AjaxResult(count == 1, null);
+        }
+        return result;
     }
 
     /**

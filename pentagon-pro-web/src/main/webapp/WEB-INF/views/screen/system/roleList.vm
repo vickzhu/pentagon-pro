@@ -15,18 +15,20 @@
 			<form action="#" method="get" class="form-horizontal">
 				<input type="hidden" id="curPage" name="curPage" value="$!{curPage}" />
                 <div class="search_option">
-					<span>
+					<div>
                         <label>状态：</label>
-                        <select name="enable">
-    						<option value="">请选择</option>
-    						<option value="1">启用</option>
-    						<option value="0">禁用</option>
-                        </select>
-					</span>
-    				<span>
+						<span>
+                            <select name="enable">
+        						<option value="">请选择</option>
+        						<option value="1">启用</option>
+        						<option value="0">禁用</option>
+                            </select>
+						</span>
+					</div>
+    				<div>
     					<button type="submit" class="btn btn-success">搜索</button>
     					<button type="button" class="btn btn-primary" onclick="location.href='#springUrl("/system/role/add")'">添加角色</button>
-					</span>
+					</div>
                 </div>
 			</form>
           </div>
