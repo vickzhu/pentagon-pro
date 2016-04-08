@@ -310,7 +310,7 @@ Enjoy!
 
       divTag.addClass(options.radioClass);
 
-      if(options.useID && elem.attr("id") != ""){
+      if(options.useID && elem.attr("id") != null){
         divTag.attr("id", options.idPrefix+"-"+elem.attr("id"));
       }
 

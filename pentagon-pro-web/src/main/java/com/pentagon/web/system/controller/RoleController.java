@@ -113,7 +113,7 @@ public class RoleController {
 
     @ResponseBody
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public ModelAndView doEdit(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public AjaxResult doEdit(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String roleId = request.getParameter("roleId");
         if (StringUtil.isBlank(roleId)) {
             response.sendError(403);
@@ -125,8 +125,8 @@ public class RoleController {
         role.setRoleName(roleName);
         role.setRoleDesc(roleDesc);
         role.setGmtUpdate(new Date());
-        roleService.updateByPrimaryKey(role);
-        return null;
+        int count = roleService.updateByPrimaryKey(role);
+        return new AjaxResult(count > 0, null);
     }
 
     /**
@@ -155,7 +155,8 @@ public class RoleController {
     public ModelAndView assignRezPerm(long roleId) {
         List<ResourcePermission> resourceList = resourceService.selectByExample(null);
         List<ResourcePermissionGroup> resourceGroupList = resourceGroupService.selectByExample(null);
-        RolePermission permission = rolePermissionService.selectByPermissionType(roleId, PermissionType.RESOURCE);
+        RolePermission permission = rolePermissionService.selectByPermissionTypeWithBlobs(roleId,
+                                                                                          PermissionType.RESOURCE);
         Map<Long, List<ResourcePermission>> resourceMap = new HashMap<Long, List<ResourcePermission>>();
         for (ResourcePermission resource : resourceList) {
             long groupId = resource.getResourceGroupId();
@@ -167,11 +168,13 @@ public class RoleController {
             rl.add(resource);
         }
         Map<Long, String> permissionMap = new HashMap<Long, String>();
-        String permissionStr = permission.getPermissionIds();
-        if (StringUtil.isNotBlank(permissionStr)) {
-            String[] permissionArr = permissionStr.split(SymbolConstant.COMMA);
-            for (String str : permissionArr) {
-                permissionMap.put(Long.valueOf(str), str);
+        if (permission != null) {
+            String permissionStr = permission.getPermissionIds();
+            if (StringUtil.isNotBlank(permissionStr)) {
+                String[] permissionArr = permissionStr.split(SymbolConstant.COMMA);
+                for (String str : permissionArr) {
+                    permissionMap.put(Long.valueOf(str), str);
+                }
             }
         }
         Role role = roleService.selectByPrimaryKey(roleId);
@@ -188,18 +191,19 @@ public class RoleController {
     public AjaxResult doAssignRezPerm(HttpServletRequest request, Long roleId) {
         String[] resourceId = request.getParameterValues("resourceId");
         String resourceIds = StringUtil.join(resourceId, SymbolConstant.COMMA);
-        RolePermission rolePermission = rolePermissionService.selectByPermissionType(roleId, PermissionType.RESOURCE);
+        RolePermission permission = rolePermissionService.selectByPermissionTypeWithBlobs(roleId,
+                                                                                          PermissionType.RESOURCE);
         AjaxResult result = null;
-        if (rolePermission == null) {
-            rolePermission = new RolePermission();
-            rolePermission.setRoleId(roleId);
-            rolePermission.setPermissionIds(resourceIds);
-            rolePermission.setPermissionType(PermissionType.RESOURCE.getCode());
-            int count = rolePermissionService.insert(rolePermission);
+        if (permission == null) {
+            permission = new RolePermission();
+            permission.setRoleId(roleId);
+            permission.setPermissionIds(resourceIds);
+            permission.setPermissionType(PermissionType.RESOURCE.getCode());
+            int count = rolePermissionService.insert(permission);
             result = new AjaxResult(count == 1, null);
         } else {
-            rolePermission.setPermissionIds(resourceIds);
-            int count = rolePermissionService.updateByPrimaryKey(rolePermission);
+            permission.setPermissionIds(resourceIds);
+            int count = rolePermissionService.updateByPrimaryKeyWithBLOBs(permission);
             result = new AjaxResult(count == 1, null);
         }
         return result;

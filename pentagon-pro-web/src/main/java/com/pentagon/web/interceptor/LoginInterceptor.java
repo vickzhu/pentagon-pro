@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.pentagon.system.dao.model.User;
-import com.pentagon.web.tool.SessionStore;
+import com.pentagon.web.util.SessionStore;
 
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {

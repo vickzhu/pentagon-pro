@@ -64,9 +64,8 @@
 				#end
               </tbody>
             </table>
-			  <div id="page_nav">
-			  </div>
-			</div>
+			<div id="page_nav"></div>
+    		</div>
           </div>
         </div>
     </div>

@@ -19,7 +19,7 @@ import com.gandalf.framework.web.tool.RequestUtil;
 import com.pentagon.system.dao.model.User;
 import com.pentagon.system.service.UserService;
 import com.pentagon.web.exception.PentagonSystemException;
-import com.pentagon.web.tool.SessionStore;
+import com.pentagon.web.util.SessionStore;
 
 @Controller
 public class SecurityController {

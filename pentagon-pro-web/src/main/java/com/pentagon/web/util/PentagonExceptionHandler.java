@@ -1,4 +1,4 @@
-package com.pentagon.web.tool;
+package com.pentagon.web.util;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

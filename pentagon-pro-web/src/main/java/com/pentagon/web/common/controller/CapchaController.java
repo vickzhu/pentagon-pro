@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.gandalf.framework.util.CaptchaUtil;
-import com.pentagon.web.tool.SessionStore;
+import com.pentagon.web.util.SessionStore;
 
 @Controller
 public class CapchaController {

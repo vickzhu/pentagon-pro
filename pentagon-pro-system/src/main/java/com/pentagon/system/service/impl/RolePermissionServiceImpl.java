@@ -58,12 +58,12 @@ public class RolePermissionServiceImpl extends BaseServiceImpl<RolePermission, R
      * com.pentagon.system.common.PermissionType)
      */
     @Override
-    public RolePermission selectByPermissionType(Long roleId, PermissionType permissionType) {
+    public RolePermission selectByPermissionTypeWithBlobs(Long roleId, PermissionType permissionType) {
         RolePermissionExample example = new RolePermissionExample();
         RolePermissionExample.Criteria critera = example.createCriteria();
         critera.andRoleIdEqualTo(roleId);
         critera.andPermissionTypeEqualTo(permissionType.getCode());
-        List<RolePermission> list = mapper.selectByExample(example);
+        List<RolePermission> list = mapper.selectByExampleWithBLOBs(example);
         return CollectionUtils.isEmpty(list) ? null : list.get(0);
     }
 

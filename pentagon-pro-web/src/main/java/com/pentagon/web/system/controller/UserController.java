@@ -26,6 +26,7 @@ import com.pentagon.system.dao.model.User;
 import com.pentagon.system.dao.model.UserExample;
 import com.pentagon.system.service.RoleService;
 import com.pentagon.system.service.UserService;
+import com.pentagon.web.util.SessionStore;
 
 @Controller
 @RequestMapping("/system/user")
@@ -116,7 +117,7 @@ public class UserController {
         user.setPhone(phone);
         user.setRoleId(Long.valueOf(roleStr));
         user.setEnable(Integer.valueOf(enable));
-        // user.setCreator(creator);
+        user.setCreator(SessionStore.getUser().getUserId());
         user.setGmtCreate(new Date());
         userService.insert(user);
         return new ModelAndView("redirect:/system/user");

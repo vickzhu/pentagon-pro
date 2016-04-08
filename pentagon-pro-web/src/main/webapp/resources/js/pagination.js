@@ -16,7 +16,7 @@ function Pagination(currentPage, totalPage, callback, style) {
 	}
 	this.getHtml = function() {
 		window.pagination_callback = this.callback;
-		if(isNaN(currentPage)){
+		if(currentPage != null && isNaN(currentPage)){
 			alert("错误页码!");
 			this.currentPage=1;
 		}else{

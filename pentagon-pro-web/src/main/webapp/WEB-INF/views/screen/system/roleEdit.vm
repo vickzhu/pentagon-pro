@@ -40,6 +40,7 @@
                 </div>
                 <div class="form-actions">
                   <button type="submit" class="btn btn-success">保存</button>
+				  <button type="button" class="btn btn-inverse" onclick="window.location.href='#springUrl('/system/role')'">返回</button>
                 </div>
               </form>
             </div>
@@ -66,8 +67,8 @@
     		},
 			submitHandler:function(form){
 				jQuery.post("#springUrl('/system/role/edit')",$(form).serialize(),function(data){
-					var msg = data==true?"更新成功！":"更新失败！";
-					var icon = data==true?6:5
+					var msg = data.success?"更新成功！":"更新失败！";
+					var icon = data.success?6:5
 					layer.alert(msg, {
                       skin: 'layui-layer-molv',
 					  icon: icon,

@@ -21,6 +21,6 @@ public interface RolePermissionService extends BaseService<RolePermission, RoleP
 
     public List<RolePermission> selectByRole(Long roleId);
 
-    public RolePermission selectByPermissionType(Long roleId, PermissionType permissionType);
+    public RolePermission selectByPermissionTypeWithBlobs(Long roleId, PermissionType permissionType);
 
 }

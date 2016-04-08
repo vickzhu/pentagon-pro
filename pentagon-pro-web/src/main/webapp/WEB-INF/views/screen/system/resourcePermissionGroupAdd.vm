@@ -22,6 +22,7 @@
                 </div>
                 <div class="form-actions">
                   <button type="submit" class="btn btn-success">保存</button>
+				  <button type="button" class="btn btn-inverse" onclick="window.location.href='#springUrl('/system/resourcePermissionGroup')'">取消</button>
                 </div>
               </form>
             </div>

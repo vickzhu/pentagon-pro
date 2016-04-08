@@ -25,14 +25,14 @@
                 <div class="widget-content" id="_rg$!{group.groupId}">
 					#foreach($entry in $resourceMap.get($!{group.groupId}))
 						<label>
-							<input type="checkbox" name="resourceId" value="$!{entry.resourceId}" #if($permissionMap.get($entry.resourceId))checked #end>$!{entry.resourceName}
+							<input type="checkbox" name="resourceId" value="$!{entry.resourceId}" #if(${permissionMap.get($!{entry.resourceId})})checked #end>$!{entry.resourceName}
                         </label>						
 					#end
 				</div>
 				#end
     		<div style="padding:10px;">
     			<button id="btn_save" type="button" class="btn btn-success">保存</button>
-				<button type="button" class="btn btn-false">取消</button>
+				<button type="button" class="btn btn-inverse" onclick="window.location.href='#springUrl('/system/role')'">返回</button>
             </div>
           </form>  
         </div>
@@ -44,17 +44,23 @@
 <script src="#resources('layer/layer.js')"></script>
 <script type="text/javascript">
 	$(function(){
+		$(".widget-content").each(function(){
+			var isAllChecked = true;
+			$(this).find(":checkbox").each(function(){
+				if(!$(this).is(':checked')){
+					isAllChecked = false;
+					return;
+				}
+			});
+			if(isAllChecked){
+				$(this).prev().find(":checkbox").attr("checked",true);
+			}
+		});
+		
 		$(".cb_group").click(function(){
 			var groupId = $(this).attr("groupId");
 			var checked = $(this).attr("checked");
-			var checkbox = $("#_rg"+groupId).find("input:checkbox");
-			checkbox.each(function() {
-				if(checked){				
-					$(this).closest('.checker > span').addClass('checked');
-				} else {
-					$(this).closest('.checker > span').removeClass('checked');
-				}
-			});
+			$("#_rg"+groupId+" input:checkbox").click();
 		});
 		
 		$("#btn_save").click(function(){

@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="#resources('css/uniform.css')" />
 <div id="content">
     <div id="content-header">
-      <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Common elements</a> </div>
+      <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 首页</a> <a href="#" class="tip-bottom">资讯</a> <a href="#" class="current">资讯类别</a> </div>
     </div>
     <div class="container-fluid">
       <hr>
@@ -9,21 +9,21 @@
         <div class="span6">
           <div class="widget-box">
             <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-              <h5>资源权限组</h5>
+              <h5>添加资讯类别</h5>
             </div>
             <div class="widget-content nopadding">
-              <form id="resource_form" method="post" class="form-horizontal" novalidate="novalidate">
+              <form action="#springUrl('/news/category/edit')" id="news_category_form" method="post" class="form-horizontal" novalidate="novalidate">
 				$!{tokenTool.hiddenField}
-				<input type="hidden" name="groupId" value="${group.groupId}" />
+				<input type="hidden" name="categoryId" value="$!{category.categoryId}" />
                 <div class="control-group">
-                  <label class="control-label">权限组名 :</label>
+                  <label class="control-label"><span class="star">*</span>资讯类别:</label>
                   <div class="controls">
-                    <input id="groupName" name="groupName" type="text" value="$!{group.groupName}" placeholder="Group name" />
+                    <input id="categoryName" name="categoryName" type="text" value="$!{category.categoryName}"/>
                   </div>
                 </div>
                 <div class="form-actions">
                   <button type="submit" class="btn btn-success">保存</button>
-				  <button type="button" class="btn btn-inverse" onclick="window.location.href='#springUrl('/system/resourcePermissionGroup')'">返回</button>
+				  <button type="button" class="btn btn-inverse" onclick="window.location.href='#springUrl('/news/category')'">返回</button>
                 </div>
               </form>
             </div>
@@ -37,12 +37,27 @@
 <script src="#resources('layer/layer.js')"></script>
 <script type="text/javascript">
 	$(function(){
-		$("#resource_form").validate({
-    		groupName:{
-    			required:true
+		$("#news_category_form").validate({
+    		rules:{
+				categoryName:{
+					required:true,
+					remote:{
+						type:"get",
+                    	url: "#springUrl('/news/category/isNotExist')",
+						data:{
+                            categoryName:function() {
+                                return $("#categoryName").val();
+                            }
+                        },
+						dataType: "json"
+					}					
+				}
     		},
 			messages:{
-				required:"请输入权限组名"
+				categoryName:{
+					required:"请输入资讯类别！",
+					remote:"该资讯类别已存在!"
+				}
 			},
     		errorClass: "help-inline",
     		errorElement: "span",
@@ -55,7 +70,7 @@
     			$(element).parents('.control-group').addClass('success');
     		},
 			submitHandler:function(form){
-				jQuery.post("#springUrl('/system/resourcePermissionGroup/edit')",$(form).serialize(),function(data){
+				jQuery.post("#springUrl('/news/category/edit')",$(form).serialize(),function(data){
 					var msg = data?"更新成功！":"更新失败！";
 					var icon = data?6:5;
 					layer.alert(msg, {
