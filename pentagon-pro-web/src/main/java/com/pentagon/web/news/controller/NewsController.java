@@ -154,10 +154,11 @@ public class NewsController {
         long newsId = Long.valueOf(newsIdStr);
         News news = newsService.selectByPrimaryKey(newsId);
         NewsContent newsContent = contentService.selectByNewsId(newsId);
-
-        ModelAndView mav = new ModelAndView("system/userEdit");
+        List<NewsCategory> categoryList = categoryService.selectByExample(null);
+        ModelAndView mav = new ModelAndView("news/newsEdit");
         mav.addObject("news", news);
         mav.addObject("newsContent", newsContent);
+        mav.addObject("categoryList", categoryList);
         return mav;
     }
 

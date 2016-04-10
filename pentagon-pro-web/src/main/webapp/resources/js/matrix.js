@@ -150,11 +150,11 @@ $(document).ready(function(){
 		$(this).css({'border-color':'#aaaaaa'});
 	});
 	
-	$('.lightbox_trigger').click(function(e) {
+	$('.lightbox_trigger, .thumbnails img').click(function(e) {
 		
 		e.preventDefault();
 		
-		var image_href = $(this).attr("href");
+		var image_href = $(this).attr("src");
 		
 		if ($('#lightbox').length > 0) {
 			

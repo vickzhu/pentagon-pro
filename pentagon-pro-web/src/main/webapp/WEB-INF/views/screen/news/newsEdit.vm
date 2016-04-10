@@ -8,27 +8,28 @@
         <div class="span12">
           <div class="widget-box">
             <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-              <h5>添加资讯</h5>
+              <h5>修改资讯</h5>
             </div>
             <div class="widget-content nopadding">
-              <form action="#springUrl('/news/add')" id="news_form" method="post" class="form-horizontal" novalidate="novalidate">
+              <form action="#springUrl('/news/edit')" id="news_form" method="post" class="form-horizontal" novalidate="novalidate">
 				$!{tokenTool.hiddenField}
+				<input type="hidden" name="newsId" value="$!{news.newsId}" />
                 <div class="control-group">
                   <label class="control-label"><span class="star">*</span>标题:</label>
                   <div class="controls">
-                    <input id="title" name="title" class="span6" type="text" placeholder="Title" />
+                    <input id="title" name="title" class="span6" type="text" placeholder="Title" value="$!{news.title}"/>
                   </div>
                 </div>
 				<div class="control-group">
                   <label class="control-label">原标题:</label>
                   <div class="controls">
-                    <input id="sourceTitle" name="sourceTitle" class="span6" type="text" placeholder="Source Title" />
+                    <input id="sourceTitle" name="sourceTitle" class="span6" type="text" placeholder="Source Title" value="$!{newsContent.sourceTitle}" />
                   </div>
                 </div>
 				<div class="control-group">
                   <label class="control-label">来源:</label>
                   <div class="controls">
-                    <input id="source" name="source" type="text" placeholder="Source" />
+                    <input id="source" name="source" type="text" placeholder="Source" value="$!{news.source}" />
                   </div>
                 </div>
 				<div class="control-group">
@@ -37,7 +38,7 @@
 					<select name="category">
 						<option value="">请选择</option>
 						#foreach($category in $categoryList)
-						<option value="$!{category.categoryId}">$!{category.categoryName}</option>	
+						<option value="$!{category.categoryId}" #if(${news.newsCategory}==$!{category.categoryId})selected #end>$!{category.categoryName}</option>	
 						#end
                     </select>
                   </div>
@@ -45,49 +46,48 @@
 				<div class="control-group">
                   <label class="control-label">Keywords:</label>
                   <div class="controls">
-					<input id="keywords" name="keywords" class="span6" type="text" placeholder="Keywords" />
+					<input id="keywords" name="keywords" class="span6" type="text" placeholder="Keywords" value="$!{newsContent.keywords}" />
                   </div>
                 </div>
 				<div class="control-group">
                   <label class="control-label">Description:</label>
                   <div class="controls">
-					<input id="description" name="description" class="span6" type="text" placeholder="Description" />
+					<input id="description" name="description" class="span6" type="text" placeholder="Description" value="$!{newsContent.description}" />
                   </div>
                 </div>
 				<div class="control-group">
                   <label class="control-label">简介:</label>
                   <div class="controls">
-					<textarea id="brief" name="brief" class="span6"></textarea>
+					<textarea id="brief" name="brief" class="span6">$!{newsContent.brief}</textarea>
                   </div>
                 </div>
 				<div class="control-group">
                   <label class="control-label"><span class="star">*</span>内容:</label>
                   <div class="controls">
-                    <textarea class="textarea_editor span8" style="height:600px;" placeholder="Enter text ..." name="content"></textarea>
+                    <textarea class="textarea_editor span8" style="height:600px;" placeholder="Enter text ..." name="content">$!{newsContent.content}</textarea>
                   </div>
                 </div>
 				<div class="control-group">
                   <label class="control-label">是否上线:</label>
                   <div class="controls">
-                    <label><input type="radio" name="online" value="1"/>是</label>
-					<label><input type="radio" name="online" value="2" checked />否</label>
+                    <label><input type="radio" name="online" value="1" #if(${news.online}==1)checked #end/>是</label>
+					<label><input type="radio" name="online" value="2" #if(${news.online}==2)checked #end />否</label>
                   </div>
                 </div>
 				<div class="control-group">
                   <label class="control-label">优先级:</label>
                   <div class="controls">
                     <select name="priority">
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3" selected >3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
+						<option value="1" #if(${news.priority}==1)selected #end>1</option>
+						<option value="2" #if(${news.priority}==2)selected #end>2</option>
+						<option value="3" #if(${news.priority}==3)selected #end>3</option>
+						<option value="4" #if(${news.priority}==4)selected #end>4</option>
+						<option value="5" #if(${news.priority}==5)selected #end>5</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-actions">
                   <button type="submit" class="btn btn-success">保存</button>
-				  <button type="reset" class="btn btn-info">重置</button>
 				  <button type="button" class="btn btn-inverse" onclick="window.location.href='#springUrl('/news')'">取消</button>
                 </div>
               </form>
@@ -97,6 +97,7 @@
       </div>
     </div>
 </div>
+
 <script src="#resources('js/jquery.validate.js')"></script>
 <script src="#resources('js/wysihtml5-0.3.0.js')"></script>
 <script src="#resources('js/bootstrap-wysihtml5.js')"></script>

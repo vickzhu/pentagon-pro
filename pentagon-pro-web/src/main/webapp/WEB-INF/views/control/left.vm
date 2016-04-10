@@ -2,7 +2,12 @@
 
 <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard2</a>
   <ul>
-    <li class="submenu"> <a href="#"><i class="icon icon-info-sign"></i> <span>资讯管理</span> <span class="label label-important">2</span></a>
+	<li class="submenu"> <a href="#"><i class="icon icon-file"></i> <span>文件管理</span> <span class="label label-important">1</span></a>
+      <ul>
+        <li><a href="#springUrl('/files/image')">图片管理</a></li>
+      </ul>
+    </li>
+    <li class="submenu"> <a href="#"><i class="icon icon-list"></i> <span>资讯管理</span> <span class="label label-important">2</span></a>
       <ul>
         <li><a href="#springUrl('/news/category')">资讯类别</a></li>
         <li><a href="#springUrl('/news')">资讯</a></li>
