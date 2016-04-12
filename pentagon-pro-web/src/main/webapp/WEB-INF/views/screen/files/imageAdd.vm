@@ -27,7 +27,11 @@
 				<div class="control-group">
                   <label class="control-label">图片:</label>
                   <div class="controls">
-					<input type="file" name="imgFile" />
+					<button id="selFile" type="button" class="btn btn-info">上传图片</button>
+					<div id="fileDiv" style="display:none;">
+    					<img id="selectedImg" name="selectedImg" style="max-width:200px;display:block;"/>
+    					
+					</div>
                   </div>
                 </div>
                 <div class="form-actions">
@@ -41,3 +45,27 @@
       </div>
     </div>
 </div>
+<form method="post" enctype="multipart/form-data" style="display:none;">
+	<input id="imgFile" type="file" name="imgFile"/>
+</form>
+<script type="text/javascript">
+	$(function(){
+		$("#selFile").click(function(){
+			$("#imgFile").click();
+		});
+		
+		$("#imgFile").change(function(){
+			var fileObj = document.getElementById("imgFile");
+			if(fileObj.files && fileObj.files[0]){
+				var file = fileObj.files[0];
+				$("#fileDiv").show();
+				$("#selectedImg").attr("src",window.URL.createObjectURL(file));
+			} else {
+				$("#fileDiv").show();
+				var imgSrc = $("#imgFile").val();
+				console.log(imgSrc);
+				$("#selectedImg").attr("src",imgSrc);
+			}
+		});
+	});
+</script>
