@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$('input[type=checkbox],input[type=radio],input[type=file]').uniform();
+	$('input[type=checkbox],input[type=radio],input[type=file]').uniform({fileBtnText: '选择文件'});
 	
 	$.ajaxSetup({
 		complete:function(xhr, ts){
